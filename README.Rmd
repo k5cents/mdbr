@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental][life_badge]][life_link]
 [![CRAN status][cran_badge]][cran_link]
-[![Travis build status][trav_badge]][trav_link]
 [![Codecov test coverage][cov_badge]][cov_link]
 ![Downloads][dl_badge]
+[![R build status][ga_badge]][ga_link]
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB Tools][mdbt] written
@@ -41,8 +41,8 @@ remotes::install_github("kiernann/mdbr")
 [life_link]: https://www.tidyverse.org/lifecycle/#experimental
 [cran_badge]: https://www.r-pkg.org/badges/version/mdbr
 [cran_link]: https://CRAN.R-project.org/package=mdbr
-[trav_badge]: https://travis-ci.org/kiernann/mdbr?branch=master
-[trav_link]: https://travis-ci.org/kiernann/mdbr
+[ga_badge]: https://github.com/kiernann/mdbr/workflows/R-CMD-check/badge.svg
+[ga_link]: https://github.com/kiernann/mdbr/actions
 [cov_badge]: https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg
 [cov_link]: https://codecov.io/gh/kiernann/mdbr?branch=master
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr

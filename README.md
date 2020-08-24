@@ -9,11 +9,11 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/mdbr)](https://CRAN.R-project.org/package=mdbr)
-[![Travis build
-status](https://travis-ci.org/kiernann/mdbr?branch=master)](https://travis-ci.org/kiernann/mdbr)
 [![Codecov test
 coverage](https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg)](https://codecov.io/gh/kiernann/mdbr?branch=master)
-![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mdbr)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mdbr) [![R
+build
+status](https://github.com/kiernann/mdbr/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/mdbr/actions)
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB
