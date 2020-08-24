@@ -14,6 +14,8 @@ Description: Use the open source MDB Tools utilities. Primarily used for
     converting proprietary Microsoft Access files to simple text files and then
     reading those as data frames.
 License: GPL-3
+Imports: 
+    readr
 Suggests: 
     testthat
 Encoding: UTF-8
