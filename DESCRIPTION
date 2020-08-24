@@ -1,0 +1,22 @@
+Package: mdbr
+Title: Work With Microsoft Access Files 
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Kiernan",
+           family = "Nicholls",
+           role = c("aut", "cre"),
+           email = "kiernann@protonmail.com"),
+      person(given = "Brian",
+           family = "Bruns",
+           role = "cph",
+           email = "brian@bruns.com"))
+Description: Use the open source MDB Tools utilities. Primarily used for
+    converting proprietary Microsoft Access files to simple text files and then
+    reading those as data frames.
+License: GPL-3
+Suggests: 
+    testthat
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0

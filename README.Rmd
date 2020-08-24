@@ -1,0 +1,51 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# mdbr
+
+<!-- badges: start -->
+[![Lifecycle: experimental][life_badge]][life_link]
+[![CRAN status][cran_badge]][cran_link]
+[![Travis build status][trav_badge]][trav_link]
+[![Codecov test coverage][cov_badge]][cov_link]
+![Downloads][dl_badge]
+<!-- badges: end -->
+
+The goal of mdbr is to easily access the open source [MDB Tools][mdbt] written
+by Brian Bruns. The MDB Tools command line utilities take proprietary Microsoft
+Access files and convert them to standard text files.
+
+## Installation
+
+You can install the released version of mdbr from [GitHub][gh] with:
+
+```{r eval=FALSE}
+# install.packages("remotes")
+remotes::install_github("kiernann/mdbr")
+```
+
+<!-- refs: start -->
+[life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
+[life_link]: https://www.tidyverse.org/lifecycle/#experimental
+[cran_badge]: https://www.r-pkg.org/badges/version/mdbr
+[cran_link]: https://CRAN.R-project.org/package=mdbr
+[trav_badge]: https://travis-ci.org/kiernann/mdbr?branch=master
+[trav_link]: https://travis-ci.org/kiernann/mdbr
+[cov_badge]: https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg
+[cov_link]: https://codecov.io/gh/kiernann/mdbr?branch=master
+[dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
+[mdbt]: https://github.com/brianb/mdbtools
+[gh]:  https://github.com/kiernann/mdbr
+<!-- refs: end -->
