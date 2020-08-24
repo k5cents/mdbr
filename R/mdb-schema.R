@@ -12,7 +12,7 @@ mdb_schema <- function(file, table = NULL) {
   }
   x <- system2(
     command = "mdb-schema",
-    args = c(file, paste("-T", table)),
+    args = c(file, paste("-T", shQuote(table))),
     stdout = TRUE
   )
   x <- x[13:(grep("\\);", x) - 1)]
