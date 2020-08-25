@@ -4,6 +4,7 @@
 #'
 #' @param file Path to the Microsoft Access file.
 #' @return A character vector of table names.
+#' @export
 mdb_tables <- function(file) {
   x <- system2(
     command = "mdb-tables",

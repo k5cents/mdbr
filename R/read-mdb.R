@@ -17,6 +17,7 @@
 #'   `col_types` (see [mdb_schema()]) or additional `NA` values.
 #' @return A data frame.
 #' @importFrom readr read_delim
+#' @export
 read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
                        quote_escape = '"', col_names = TRUE,
                        date_format = "%Y-%m-%d %H:%M:%S", ...) {

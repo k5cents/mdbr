@@ -6,6 +6,7 @@
 #' @param table Name of the table, use `mdb_tables()`.
 #' @return A tibble of table columns and data types.
 #' @importFrom readr read_delim
+#' @export
 mdb_schema <- function(file, table = NULL) {
   if (is.null(table)) {
     stop("Must define a table name, see mdb_tables()")
