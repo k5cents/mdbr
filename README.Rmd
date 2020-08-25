@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -36,6 +38,31 @@ You can install the released version of mdbr from [GitHub][gh] with:
 remotes::install_github("kiernann/mdbr")
 ```
 
+## Example
+
+The package comes with a smaller version of the [nycflights13][nycf] example 
+RDBMS database as the `nycflights13.mdb` file. This example data can be located
+with `mdb_example()`.
+
+The `mdb_tables()` function returns a simple character vector of table names.
+
+```{r tables}
+library(mdbr)
+mdb_tables(ex <- mdb_example())
+```
+
+Those table names can be used to directly read a table as a data frame.
+
+```{r read, message=FALSE}
+read_mdb(ex, "Planes")
+```
+
+Tables can also be exported to a character string, console, or text file.
+
+```{r export}
+cat(export_mdb(ex, "Airlines", TRUE, "\t", ""), sep = "\n")
+```
+
 <!-- refs: start -->
 [life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
 [life_link]: https://www.tidyverse.org/lifecycle/#experimental
@@ -48,4 +75,5 @@ remotes::install_github("kiernann/mdbr")
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
 [mdbt]: https://github.com/brianb/mdbtools
 [gh]:  https://github.com/kiernann/mdbr
+[nycf]: https://github.com/hadley/nycflights13
 <!-- refs: end -->
