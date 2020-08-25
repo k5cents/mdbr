@@ -17,9 +17,11 @@ mdb_schema <- function(file, table = NULL) {
     stdout = TRUE
   )
   x <- x[13:(grep("\\);", x) - 1)]
-  x <- gsub("^\\s", "", x)
-  x <- gsub("\t+", ",", x)
-  x <- gsub(",\\s?$", "", x)
-  x <- gsub("\\[|\\]", "", x)
-  readr::read_delim(x, delim = ",", col_names = c("col", "type"))
+  x[grep("DateTime", x)] <- "D"
+  x[grep("Text", x)] <- "c"
+  x[grep("Integer", x)] <- "i"
+  x[grep("Double,", x)] <- "d"
+  x[grep("Boolean", x)] <- "l"
+  x[nchar(x) > 1] <- "c"
+  cols <- paste(x, collapse = "")
 }
