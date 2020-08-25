@@ -19,15 +19,16 @@
 #' @importFrom readr read_delim
 #' @export
 read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
-                       quote_escape = '"', col_names = TRUE,
-                       date_format = "%Y-%m-%d %H:%M:%S", ...) {
+                     quote_escape = '"', col_names = TRUE,
+                     date_format = "%Y-%m-%d %H:%M:%S", ...) {
   if (is.null(table)) {
-    stop("Must define a table name, see mdb_tables()")
+    stop("must define table name\n", paste(mdb_tables(file), collapse = "\n"))
   }
-  col_arg <- if (!col_names) "-H" else ""
-  x <- system2(
+  col_arg <- if (!col_names) shQuote("-H") else ""
+  tmp <- tempfile(fileext = ".csv")
+  system2(
     command = "mdb-export",
-    stdout = TRUE,
+    stdout = tmp,
     args = c(
       file, shQuote(table),
       col_arg,
@@ -38,7 +39,7 @@ read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
     )
   )
   readr::read_delim(
-    file = x,
+    file = tmp,
     delim = delim,
     quote = quote,
     escape_backslash = (quote_escape == "\\"),
