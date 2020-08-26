@@ -13,14 +13,19 @@
 #' @param date_format The format in which date columns are converted. MDB Tools
 #'   uses the `strftime(3)` format, similar to [readr::parse_date()]. No need to
 #'   specify whole string. Defaults to ISO8601.
-#' @param ... Additional arguments passed to [readr::read_delim()], like
-#'   `col_types` (see [mdb_schema()]) or additional `NA` values.
+#' @param col_types One of `NULL`, a [readr::cols()] specification, or a string.
+#'   See `vignette("readr")` for more details. A generic [readr::cols()]
+#'   specification can be made by [mdb_schema()] via the `mdb-schema` utility.
+#' @param ... Additional arguments passed to [readr::read_delim()].
 #' @return A data frame.
 #' @importFrom readr read_delim
+#' @examples
+#' read_mdb(mdb_example(), "Flights")
 #' @export
 read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
                      quote_escape = '"', col_names = TRUE,
-                     date_format = "%Y-%m-%d %H:%M:%S", ...) {
+                     date_format = "%Y-%m-%d %H:%M:%S",
+                     col_types = mdb_schema(file, table), ...) {
   if (is.null(table)) {
     stop("must define table name\n", paste(mdb_tables(file), collapse = "\n"))
   }
@@ -45,6 +50,7 @@ read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
     escape_backslash = (quote_escape == "\\"),
     escape_double = (quote_escape == '"'),
     col_names = col_names,
+    col_types = col_types,
     ...
   )
 }

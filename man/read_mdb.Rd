@@ -12,6 +12,7 @@ read_mdb(
   quote_escape = "\\"",
   col_names = TRUE,
   date_format = "\%Y-\%m-\%d \%H:\%M:\%S",
+  col_types = mdb_schema(file, table),
   ...
 )
 }
@@ -34,12 +35,18 @@ also used.}
 uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_date]{readr::parse_date()}}. No need to
 specify whole string. Defaults to ISO8601.}
 
-\item{...}{Additional arguments passed to \code{\link[readr:read_delim]{readr::read_delim()}}, like
-\code{col_types} (see \code{\link[=mdb_schema]{mdb_schema()}}) or additional \code{NA} values.}
+\item{col_types}{One of \code{NULL}, a \code{\link[readr:cols]{readr::cols()}} specification, or a string.
+See \code{vignette("readr")} for more details. A generic \code{\link[readr:cols]{readr::cols()}}
+specification can be made by \code{\link[=mdb_schema]{mdb_schema()}} via the \code{mdb-schema} utility.}
+
+\item{...}{Additional arguments passed to \code{\link[readr:read_delim]{readr::read_delim()}}.}
 }
 \value{
 A data frame.
 }
 \description{
 Convert a table to a temporary text file pass to \code{\link[readr:read_delim]{readr::read_delim()}}.
+}
+\examples{
+read_mdb(mdb_example(), "Flights")
 }
