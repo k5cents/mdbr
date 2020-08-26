@@ -16,6 +16,7 @@ Description: Use the open source MDB Tools utilities. Primarily
 License: GPL-3
 URL: https://github.com/kiernann/mdbr
 BugReports: https://github.com/kiernann/mdbr/issues
+SystemRequirements: mdbtools
 Imports: 
     readr
 Suggests: 
