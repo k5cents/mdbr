@@ -15,6 +15,8 @@
 #'   uses the `strftime(3)` format, similar to [readr::parse_date()]. No need to
 #'   specify whole string. Defaults to ISO8601.
 #' @return Invisibly, the path of the new file written.
+#' @examples
+#' export_mdb(mdb_example(), "Airlines", path = TRUE)
 #' @export
 export_mdb <- function(file, table = NULL, path = "", delim = ",", quote = '"',
                        quote_escape = '"', col_names = TRUE,

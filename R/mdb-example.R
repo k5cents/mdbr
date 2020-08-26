@@ -5,6 +5,8 @@
 #' inst/extdata directory. This function make it easy to access.
 #'
 #' @param path path to the Microsoft Access file.
+#' @examples
+#' file.size(mdb_example())
 #' @export
 mdb_example <- function(path = "nycflights13.mdb") {
   if (!is.character(path)) {

@@ -42,3 +42,6 @@ Invisibly, the path of the new file written.
 \description{
 Write a Microsoft Access table directly to a text file.
 }
+\examples{
+export_mdb(mdb_example(), "Airlines", path = TRUE)
+}
