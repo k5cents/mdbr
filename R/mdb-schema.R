@@ -31,7 +31,7 @@ mdb_schema <- function(file, table = NULL, condense = FALSE) {
   x[grep("DateTime", x)] <- "T"
   x[grep("Text", x)] <- "c"
   x[grep("Integer", x)] <- "i"
-  x[grep("Double,", x)] <- "d"
+  x[grep("Double", x)] <- "d"
   x[grep("Boolean", x)] <- "l"
   x[grep("Currency", x)] <- "n"
   x[nchar(x) > 1] <- "c"
