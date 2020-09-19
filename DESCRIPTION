@@ -1,5 +1,5 @@
 Package: mdbr
-Title: Work With Microsoft Access Files
+Title: Work with Microsoft Access Files
 Version: 0.1.0
 Authors@R: 
     person(given = "Kiernan",
@@ -9,7 +9,6 @@ Authors@R:
 Description: Use the open source MDB Tools utilities. Primarily
     used for converting proprietary Microsoft Access files to simple text
     files and then reading those as data frames.
-SystemRequirements: mdbtools: mdbtools (deb).
 License: GPL-3
 URL: https://github.com/kiernann/mdbr
 BugReports: https://github.com/kiernann/mdbr/issues
@@ -21,3 +20,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+SystemRequirements: mdbtools: mdbtools (deb).
