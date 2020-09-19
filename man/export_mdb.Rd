@@ -33,7 +33,7 @@ also used.}
 \item{col_names}{Whether or not to suppress column names from the table.}
 
 \item{date_format}{The format in which date columns are converted. MDB Tools
-uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_date]{readr::parse_date()}}. No need to
+uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_datetime]{readr::parse_date()}}. No need to
 specify whole string. Defaults to ISO8601.}
 }
 \value{

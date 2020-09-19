@@ -11,7 +11,7 @@ mdb_schema(file, table = NULL, condense = FALSE)
 
 \item{table}{Name of the table, use \code{\link[=mdb_tables]{mdb_tables()}}.}
 
-\item{condense}{Should \code{\link[readr:cols_condense]{readr::cols_condense()}} be called on the spec?}
+\item{condense}{Should \code{\link[readr:spec]{readr::cols_condense()}} be called on the spec?}
 }
 \value{
 A readr cols specification list.
