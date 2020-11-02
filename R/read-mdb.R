@@ -4,6 +4,9 @@
 #'
 #' @param file Path to the Microsoft Access file.
 #' @param table Name of the table, use `mdb_tables()`.
+#' @param stdout Where to save the exported text; accepted options are `TRUE`,
+#'   which creates a character vector in memory, or a file path to write
+#'   (defaults to [tempfile()]).
 #' @param delim Single character used to separate fields within a record.
 #' @param quote Single character used to quote strings. Defaults to `"`.
 #' @param quote_escape A single character (or empty string) to escape double
@@ -22,18 +25,23 @@
 #' @examples
 #' read_mdb(mdb_example(), "Flights")
 #' @export
-read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
-                     quote_escape = '"', col_names = TRUE,
+read_mdb <- function(file, table = NULL, stdout = tempfile(), delim = ",",
+                     quote = '"', quote_escape = '"', col_names = TRUE,
                      date_format = "%Y-%m-%d %H:%M:%S",
                      col_types = mdb_schema(file, table), ...) {
   if (is.null(table)) {
-    stop("must define table name\n", paste(mdb_tables(file), collapse = "\n"))
+    stop(
+      "must define a table name, from mdb_tables():\n",
+      paste("*", mdb_tables(file), collapse = "\n")
+    )
+  }
+  if (is.character(stdout) && nchar(stdout) == 0) {
+    stop("use export_mdb() to print to console")
   }
   col_arg <- if (!col_names) shQuote("-H") else ""
-  tmp <- tempfile(fileext = ".csv")
-  system2(
+  output <- system2(
     command = "mdb-export",
-    stdout = tmp,
+    stdout = stdout,
     args = c(
       file, shQuote(table),
       col_arg,
@@ -43,8 +51,13 @@ read_mdb <- function(file, table = NULL, delim = ",", quote = '"',
       paste("-X", shQuote(quote_escape))
     )
   )
+  if (isTRUE(stdout)) {
+    input <- output
+  } else {
+    input <- stdout
+  }
   readr::read_delim(
-    file = tmp,
+    file = input,
     delim = delim,
     quote = quote,
     escape_backslash = (quote_escape == "\\"),

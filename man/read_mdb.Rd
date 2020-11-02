@@ -7,6 +7,7 @@
 read_mdb(
   file,
   table = NULL,
+  stdout = tempfile(),
   delim = ",",
   quote = "\\"",
   quote_escape = "\\"",
@@ -20,6 +21,10 @@ read_mdb(
 \item{file}{Path to the Microsoft Access file.}
 
 \item{table}{Name of the table, use \code{mdb_tables()}.}
+
+\item{stdout}{Where to save the exported text; accepted options are \code{TRUE},
+which creates a character vector in memory, or a file path to write
+(defaults to \code{\link[=tempfile]{tempfile()}}).}
 
 \item{delim}{Single character used to separate fields within a record.}
 
