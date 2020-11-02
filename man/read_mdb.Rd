@@ -53,5 +53,7 @@ A data frame.
 Convert a table to a temporary text file pass to \code{\link[readr:read_delim]{readr::read_delim()}}.
 }
 \examples{
+\dontrun{
 read_mdb(mdb_example(), "Flights")
+}
 }

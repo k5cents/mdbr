@@ -1,6 +1,7 @@
 # mdbr 0.1.1
 
 * `read_mdb()` now has `stdout()` which can take `TRUE` or a file path.
+* Examples and tests don't run on CRAN.
 
 # mdbr 0.1.0
 

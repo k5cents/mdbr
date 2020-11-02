@@ -20,5 +20,7 @@ A readr cols specification list.
 Used to determine the column types for \code{\link[=read_mdb]{read_mdb()}}.
 }
 \examples{
+\dontrun{
 mdb_schema(mdb_example(), "Flights", condense = TRUE)
+}
 }

@@ -8,7 +8,9 @@
 #' @return A readr cols specification list.
 #' @importFrom readr as.col_spec
 #' @examples
+#' \dontrun{
 #' mdb_schema(mdb_example(), "Flights", condense = TRUE)
+#' }
 #' @export
 mdb_schema <- function(file, table = NULL, condense = FALSE) {
   if (is.null(table)) {

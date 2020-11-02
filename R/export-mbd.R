@@ -16,7 +16,9 @@
 #'   specify whole string. Defaults to ISO8601.
 #' @return Invisibly, the path of the new file written.
 #' @examples
+#' \dontrun{
 #' export_mdb(mdb_example(), "Airlines", path = TRUE)
+#' }
 #' @export
 export_mdb <- function(file, table = NULL, path = "", delim = ",", quote = '"',
                        quote_escape = '"', col_names = TRUE,

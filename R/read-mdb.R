@@ -23,7 +23,9 @@
 #' @return A data frame.
 #' @importFrom readr read_delim
 #' @examples
+#' \dontrun{
 #' read_mdb(mdb_example(), "Flights")
+#' }
 #' @export
 read_mdb <- function(file, table = NULL, stdout = tempfile(), delim = ",",
                      quote = '"', quote_escape = '"', col_names = TRUE,

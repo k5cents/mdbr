@@ -14,6 +14,3 @@ mdbr comes bundled with a sample file from the
 \href{https://github.com/hadley/nycflights13}{nycflights13} package in its
 inst/extdata directory. This function make it easy to access.
 }
-\examples{
-file.size(mdb_example())
-}
