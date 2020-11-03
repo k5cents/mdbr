@@ -17,7 +17,7 @@ status](https://github.com/kiernann/mdbr/workflows/R-CMD-check/badge.svg)](https
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB
-Tools](https://github.com/brianb/mdbtools) written by Brian Bruns. The
+Tools](https://github.com/mdbtools/mdbtools) written by Brian Bruns. The
 MDB Tools command line utilities take proprietary Microsoft Access files
 and convert them to standard text files. This package is experimental
 and has only been tested on simple MDB databases.
@@ -28,11 +28,18 @@ You can install the development version of mdbr from
 [GitHub](https://github.com/kiernann/mdbr) with:
 
 ``` r
+install.packages("mdbr")
+```
+
+The development version can be installed from
+[GitHub](https://github.com/kiernann/mdbr) with:
+
+``` r
 # install.packages("remotes")
 remotes::install_github("kiernann/mdbr")
 ```
 
-The user must install [MDB Tools](https://github.com/brianb/mdbtools)
+The user must install [MDB Tools](https://github.com/mdbtools/mdbtools)
 separately. Users on Debian systems can install the tools from the apt
 repository.
 
@@ -40,8 +47,8 @@ repository.
 sudo apt install mdbtools
 ```
 
-More methods can be found on the author’s [installation
-guide](http://mdbtools.sourceforge.net/install/).
+More installation methods can be found on the package’s
+[README](https://github.com/mdbtools/mdbtools/blob/dev/README.md).
 
 ## Example
 
@@ -93,7 +100,7 @@ read_mdb(ex, "Airports")
 #> # … with 1,448 more rows
 ```
 
-Tables can also be exported to a character string, the console, or a
+Tables can also be exported to a character vector, the console, or a
 text file.
 
 ``` r

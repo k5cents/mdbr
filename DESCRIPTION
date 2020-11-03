@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "kiernann@protonmail.com")
 Description: Use the open source 'MDB Tools' utilities
-    <https://github.com/mdbtools/mdbtools>. Primarily used for converting
+    <https://github.com/mdbtools/mdbtools/>. Primarily used for converting
     proprietary Microsoft Access files to simple text files and then
     reading those as data frames.
 License: GPL-3

@@ -37,7 +37,13 @@ experimental and has only been tested on simple MDB databases.
 
 You can install the development version of mdbr from [GitHub][gh] with:
 
-```{r eval=FALSE}
+```{r cran, eval=FALSE}
+install.packages("mdbr")
+```
+
+The development version can be installed from [GitHub][gh] with:
+
+```{r github, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("kiernann/mdbr")
 ```
@@ -49,7 +55,7 @@ install the tools from the apt repository.
 sudo apt install mdbtools
 ```
 
-More methods can be found on the author's [installation guide][install].
+More installation methods can be found on the package's [README][readme].
 
 ## Example
 
@@ -76,7 +82,7 @@ Those column types are used when reading a table as a text file.
 read_mdb(ex, "Airports")
 ```
 
-Tables can also be exported to a character string, the console, or a text file.
+Tables can also be exported to a character vector, the console, or a text file.
 
 ```{r export}
 string <- export_mdb(ex, "Airlines", TRUE, delim = "|", quote = "'")
@@ -93,9 +99,9 @@ cat(string, sep = "\n")
 [cov_badge]: https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg
 [cov_link]: https://codecov.io/gh/kiernann/mdbr?branch=master
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
-[mdbt]: https://github.com/brianb/mdbtools
+[mdbt]: https://github.com/mdbtools/mdbtools
 [gh]:  https://github.com/kiernann/mdbr
-[install]: http://mdbtools.sourceforge.net/install/
+[readme]: https://github.com/mdbtools/mdbtools/blob/dev/README.md
 [nycf]: https://github.com/hadley/nycflights13
 [spec]: https://readr.tidyverse.org/reference/spec.html
 <!-- refs: end -->
