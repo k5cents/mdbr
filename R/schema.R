@@ -13,8 +13,9 @@
 #' }
 #' @export
 mdb_schema <- function(file, table = NULL, condense = FALSE) {
+  check_mdb_tools()
   if (is.null(table)) {
-    stop("Must define a table name, see mdb_tables()")
+    stop("Must define a table name, see mdb_tables()", call. = FALSE)
   }
   x <- system2(
     command = "mdb-schema",

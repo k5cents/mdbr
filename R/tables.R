@@ -1,4 +1,4 @@
-#' List tables in a database file
+#' List tables in a Jet database
 #'
 #' Used to find table names for `read_mdb()`.
 #'
@@ -6,10 +6,11 @@
 #' @return A character vector of table names.
 #' @export
 mdb_tables <- function(file) {
+  check_mdb_tools()
   x <- system2(
     command = "mdb-tables",
     args = c(file, "-d '\n'"),
     stdout = TRUE
   )
-  x[-length(x)]
+  x[nzchar(x)]
 }

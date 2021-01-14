@@ -23,20 +23,21 @@
 export_mdb <- function(file, table = NULL, path = "", delim = ",", quote = '"',
                        quote_escape = '"', col_names = TRUE,
                        date_format = "%Y-%m-%d %H:%M:%S") {
+  check_mdb_tools()
   if (is.null(table)) {
-    stop("must define table name\n", paste(mdb_tables(file), collapse = "\n"))
+    stop("Must define a table name, see mdb_tables()", call. = FALSE)
   }
-  col_arg <- if (!col_names) shQuote("-H") else ""
   out <- system2(
     command = "mdb-export",
     stdout = path,
     args = c(
-      file, shQuote(table),
-      col_arg,
+      ifelse(!col_names, shQuote("-H"), ""),
       paste("-d", shQuote(delim)),
       paste("-D", shQuote(date_format)),
       paste("-q", shQuote(quote)),
-      paste("-X", shQuote(quote_escape))
+      paste("-X", shQuote(quote_escape)),
+      shQuote(file),
+      shQuote(table)
     )
   )
   if (isTRUE(path)) {

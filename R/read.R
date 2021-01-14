@@ -31,14 +31,12 @@ read_mdb <- function(file, table = NULL, stdout = tempfile(), delim = ",",
                      quote = '"', quote_escape = '"', col_names = TRUE,
                      date_format = "%Y-%m-%d %H:%M:%S",
                      col_types = mdb_schema(file, table), ...) {
+  check_mdb_tools()
   if (is.null(table)) {
-    stop(
-      "must define a table name, from mdb_tables():\n",
-      paste("*", mdb_tables(file), collapse = "\n")
-    )
+    stop("Must define a table name, see mdb_tables()", call. = FALSE)
   }
   if (is.character(stdout) && nchar(stdout) == 0) {
-    stop("use export_mdb() to print to console")
+    stop("Use export_mdb() to print to console", call. = FALSE)
   }
   col_arg <- if (!col_names) shQuote("-H") else ""
   output <- system2(
