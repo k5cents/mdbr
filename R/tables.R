@@ -1,4 +1,4 @@
-#' List tables in a Jet database
+#' List tables in a Microsoft Access database
 #'
 #' Used to find table names for `read_mdb()`.
 #'

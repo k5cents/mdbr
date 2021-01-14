@@ -1,4 +1,4 @@
-#' Create a cols() spec from schema
+#' Create a column specification from Data Definition Language
 #'
 #' Used to determine the column types for [read_mdb()].
 #'

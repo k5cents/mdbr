@@ -1,6 +1,8 @@
-#' Save a table as a text file
+#' Save an Access database table as a text file
 #'
-#' Write a Microsoft Access table directly to a text file.
+#' Convert the data of a table into a delimited text string. Save the string as
+#' a character vector or write it to a text file. This direct conversion makes
+#' it easy to read tables into R or a spreadsheet.
 #'
 #' @param file Path to the Microsoft Access file.
 #' @param table Name of the table, use `mdb_tables()`.
