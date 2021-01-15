@@ -35,13 +35,13 @@ experimental and has only been tested on simple MDB databases.
 
 ## Installation
 
-You can install the development version of mdbr from [GitHub][gh] with:
+You can install the release version of mdbr from [CRAN][cran].
 
 ```{r cran, eval=FALSE}
 install.packages("mdbr")
 ```
 
-The development version can be installed from [GitHub][gh] with:
+The development version can be installed from [GitHub][gh].
 
 ```{r github, eval=FALSE}
 # install.packages("remotes")
@@ -85,7 +85,7 @@ read_mdb(ex, "Airports")
 Tables can also be exported to a character vector, the console, or a text file.
 
 ```{r export}
-string <- export_mdb(ex, "Airlines", TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
 cat(string, sep = "\n")
 ```
 
@@ -101,6 +101,7 @@ cat(string, sep = "\n")
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
 [mdbt]: https://github.com/mdbtools/mdbtools
 [gh]:  https://github.com/kiernann/mdbr
+[cran]:  https://cran.r-project.org/package=mdbr
 [readme]: https://github.com/mdbtools/mdbtools/blob/dev/README.md
 [nycf]: https://github.com/hadley/nycflights13
 [spec]: https://readr.tidyverse.org/reference/spec.html

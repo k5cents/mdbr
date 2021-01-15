@@ -24,15 +24,15 @@ and has only been tested on simple MDB databases.
 
 ## Installation
 
-You can install the development version of mdbr from
-[GitHub](https://github.com/kiernann/mdbr) with:
+You can install the release version of mdbr from
+[CRAN](https://cran.r-project.org/package=mdbr).
 
 ``` r
 install.packages("mdbr")
 ```
 
 The development version can be installed from
-[GitHub](https://github.com/kiernann/mdbr) with:
+[GitHub](https://github.com/kiernann/mdbr).
 
 ``` r
 # install.packages("remotes")
@@ -104,7 +104,7 @@ Tables can also be exported to a character vector, the console, or a
 text file.
 
 ``` r
-string <- export_mdb(ex, "Airlines", TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
 cat(string, sep = "\n")
 #> carrier|name
 #> '9E'|'Endeavor Air Inc.'
