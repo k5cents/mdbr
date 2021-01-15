@@ -72,11 +72,11 @@ object](https://readr.tidyverse.org/reference/spec.html).
 mdb_schema(ex, "Flights", condense = TRUE)
 #> cols(
 #>   .default = col_integer(),
-#>   carrier = col_character(),
-#>   tailnum = col_character(),
-#>   origin = col_character(),
-#>   dest = col_character(),
-#>   time_hour = col_datetime(format = "")
+#>   carrier = [31mcol_character()[39m,
+#>   tailnum = [31mcol_character()[39m,
+#>   origin = [31mcol_character()[39m,
+#>   dest = [31mcol_character()[39m,
+#>   time_hour = [34mcol_datetime(format = "")[39m
 #> )
 ```
 
@@ -84,20 +84,20 @@ Those column types are used when reading a table as a text file.
 
 ``` r
 read_mdb(ex, "Airports")
-#> # A tibble: 1,458 x 8
+#> [90m# A tibble: 1,458 x 8[39m
 #>    faa   name                             lat    lon   alt    tz dst   tzone              
-#>    <chr> <chr>                          <dbl>  <dbl> <int> <int> <chr> <chr>              
-#>  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
-#>  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
-#>  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
-#>  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   
-#>  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   
-#>  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   
-#>  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   
-#>  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   
-#>  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   
-#> 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles
-#> # … with 1,448 more rows
+#>    [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m                          [3m[90m<dbl>[39m[23m  [3m[90m<dbl>[39m[23m [3m[90m<int>[39m[23m [3m[90m<int>[39m[23m [3m[90m<chr>[39m[23m [3m[90m<chr>[39m[23m              
+#> [90m 1[39m 04G   Lansdowne Airport               41.1  -[31m80[39m[31m.[39m[31m6[39m  [4m1[24m044    -[31m5[39m A     America/New_York   
+#> [90m 2[39m 06A   Moton Field Municipal Airport   32.5  -[31m85[39m[31m.[39m[31m7[39m   264    -[31m6[39m A     America/Chicago    
+#> [90m 3[39m 06C   Schaumburg Regional             42.0  -[31m88[39m[31m.[39m[31m1[39m   801    -[31m6[39m A     America/Chicago    
+#> [90m 4[39m 06N   Randall Airport                 41.4  -[31m74[39m[31m.[39m[31m4[39m   523    -[31m5[39m A     America/New_York   
+#> [90m 5[39m 09J   Jekyll Island Airport           31.1  -[31m81[39m[31m.[39m[31m4[39m    11    -[31m5[39m A     America/New_York   
+#> [90m 6[39m 0A9   Elizabethton Municipal Airport  36.4  -[31m82[39m[31m.[39m[31m2[39m  [4m1[24m593    -[31m5[39m A     America/New_York   
+#> [90m 7[39m 0G6   Williams County Airport         41.5  -[31m84[39m[31m.[39m[31m5[39m   730    -[31m5[39m A     America/New_York   
+#> [90m 8[39m 0G7   Finger Lakes Regional Airport   42.9  -[31m76[39m[31m.[39m[31m8[39m   492    -[31m5[39m A     America/New_York   
+#> [90m 9[39m 0P2   Shoestring Aviation Airfield    39.8  -[31m76[39m[31m.[39m[31m6[39m  [4m1[24m000    -[31m5[39m U     America/New_York   
+#> [90m10[39m 0S9   Jefferson County Intl           48.1 -[31m123[39m[31m.[39m    108    -[31m8[39m A     America/Los_Angeles
+#> [90m# … with 1,448 more rows[39m
 ```
 
 Tables can also be exported to a character vector, the console, or a
