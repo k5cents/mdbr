@@ -114,29 +114,29 @@
 <code class="sourceCode R"><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Flights"</span>, condense <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   .default = col_integer(),</span>
-<span class="co">#&gt;   carrier = col_character(),</span>
-<span class="co">#&gt;   tailnum = col_character(),</span>
-<span class="co">#&gt;   origin = col_character(),</span>
-<span class="co">#&gt;   dest = col_character(),</span>
-<span class="co">#&gt;   time_hour = col_datetime(format = "")</span>
+<span class="co">#&gt;   carrier = [31mcol_character()[39m,</span>
+<span class="co">#&gt;   tailnum = [31mcol_character()[39m,</span>
+<span class="co">#&gt;   origin = [31mcol_character()[39m,</span>
+<span class="co">#&gt;   dest = [31mcol_character()[39m,</span>
+<span class="co">#&gt;   time_hour = [34mcol_datetime(format = "")[39m</span>
 <span class="co">#&gt; )</span></code></pre></div>
 <p>Those column types are used when reading a table as a text file.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/read_mdb.html">read_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1,458 x 8</span>
+<span class="co">#&gt; [90m# A tibble: 1,458 x 8[39m</span>
 <span class="co">#&gt;    faa   name                             lat    lon   alt    tz dst   tzone              </span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;                          &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;              </span>
-<span class="co">#&gt;  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   </span>
-<span class="co">#&gt;  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    </span>
-<span class="co">#&gt;  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    </span>
-<span class="co">#&gt;  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   </span>
-<span class="co">#&gt;  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   </span>
-<span class="co">#&gt;  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   </span>
-<span class="co">#&gt;  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   </span>
-<span class="co">#&gt;  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   </span>
-<span class="co">#&gt;  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   </span>
-<span class="co">#&gt; 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles</span>
-<span class="co">#&gt; # … with 1,448 more rows</span></code></pre></div>
+<span class="co">#&gt;    [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m                          [3m[90m&lt;dbl&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m              </span>
+<span class="co">#&gt; [90m 1[39m 04G   Lansdowne Airport               41.1  -[31m80[39m[31m.[39m[31m6[39m  [4m1[24m044    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 2[39m 06A   Moton Field Municipal Airport   32.5  -[31m85[39m[31m.[39m[31m7[39m   264    -[31m6[39m A     America/Chicago    </span>
+<span class="co">#&gt; [90m 3[39m 06C   Schaumburg Regional             42.0  -[31m88[39m[31m.[39m[31m1[39m   801    -[31m6[39m A     America/Chicago    </span>
+<span class="co">#&gt; [90m 4[39m 06N   Randall Airport                 41.4  -[31m74[39m[31m.[39m[31m4[39m   523    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 5[39m 09J   Jekyll Island Airport           31.1  -[31m81[39m[31m.[39m[31m4[39m    11    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 6[39m 0A9   Elizabethton Municipal Airport  36.4  -[31m82[39m[31m.[39m[31m2[39m  [4m1[24m593    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 7[39m 0G6   Williams County Airport         41.5  -[31m84[39m[31m.[39m[31m5[39m   730    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 8[39m 0G7   Finger Lakes Regional Airport   42.9  -[31m76[39m[31m.[39m[31m8[39m   492    -[31m5[39m A     America/New_York   </span>
+<span class="co">#&gt; [90m 9[39m 0P2   Shoestring Aviation Airfield    39.8  -[31m76[39m[31m.[39m[31m6[39m  [4m1[24m000    -[31m5[39m U     America/New_York   </span>
+<span class="co">#&gt; [90m10[39m 0S9   Jefferson County Intl           48.1 -[31m123[39m[31m.[39m    108    -[31m8[39m A     America/Los_Angeles</span>
+<span class="co">#&gt; [90m# … with 1,448 more rows[39m</span></code></pre></div>
 <p>Tables can also be exported to a character vector, the console, or a text file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airlines"</span>, path <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span>
