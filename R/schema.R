@@ -34,6 +34,7 @@ mdb_schema <- function(file, table, condense = FALSE) {
   y <- read.delim(
     file = con,
     sep = "|",
+    header = FALSE,
     col.names = c("field", "type")
   )
   z <- vapply(y$type, list_switch, character(1), mdb_col_types)
