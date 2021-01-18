@@ -85,8 +85,8 @@ read_mdb(ex, "Airports")
 Tables can also be exported to a character vector, the console, or a text file.
 
 ```{r export}
-string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
-cat(string, sep = "\n")
+string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+cat(string)
 ```
 
 <!-- refs: start -->

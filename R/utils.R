@@ -1,9 +1,9 @@
 has_mdb_tools <- function() {
-  try <- tryCatch(
+  try <- suppressWarnings(tryCatch(
     expr = system2("mdb-tables", stderr = TRUE, stdout = TRUE),
     error = function(e) return(NULL)
-  )
-  is.null(try)
+  ))
+  !is.null(try)
 }
 
 check_mdb_tools <- function() {

@@ -1,4 +1,4 @@
-# mdbr (development version)
+# mdbr 0.2.0
 
 # mdbr 0.1.2
 

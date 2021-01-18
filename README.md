@@ -86,7 +86,7 @@ Those column types are used when reading a table as a text file.
 read_mdb(ex, "Airports")
 #> # A tibble: 1,458 x 8
 #>    faa   name                             lat    lon   alt    tz dst   tzone              
-#>    <chr> <chr>                          <dbl>  <dbl> <int> <int> <chr> <chr>              
+#>    <chr> <chr>                          <dbl>  <dbl> <dbl> <dbl> <chr> <chr>              
 #>  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
 #>  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
 #>  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
@@ -104,8 +104,8 @@ Tables can also be exported to a character vector, the console, or a
 text file.
 
 ``` r
-string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
-cat(string, sep = "\n")
+string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+cat(string)
 #> carrier|name
 #> '9E'|'Endeavor Air Inc.'
 #> 'AA'|'American Airlines Inc.'
