@@ -2,42 +2,51 @@
 % Please edit documentation in R/export.R
 \name{export_mdb}
 \alias{export_mdb}
-\title{Save an Access database table as a text file}
+\title{Export an Access database table as a text file}
 \usage{
 export_mdb(
   file,
-  table = NULL,
-  path = "",
+  table,
+  output = TRUE,
   delim = ",",
   quote = "\\"",
-  quote_escape = "\\"",
+  quote_escape = "double",
   col_names = TRUE,
+  eol = "\\n",
   date_format = "\%Y-\%m-\%d \%H:\%M:\%S"
 )
 }
 \arguments{
 \item{file}{Path to the Microsoft Access file.}
 
-\item{table}{Name of the table, use \code{mdb_tables()}.}
+\item{table}{Name of the table, list with \code{mdb_tables()}.}
 
-\item{path}{Path or connection to write to. Empty string prints to console.}
+\item{output}{Path or connection to write to. Passed to the \code{stdout} argument
+of \code{\link[=system2]{system2()}}. Possible values are "", to the R console (the default),
+\code{NULL} or \code{FALSE} (discard output), \code{TRUE} (capture the output in a
+character vector) or a character string naming a file.}
 
-\item{delim}{Single character used to separate fields within a record.}
+\item{delim}{Delimiter used to separate values.}
 
 \item{quote}{Single character used to quote strings. Defaults to \verb{"}.}
 
-\item{quote_escape}{A single character (or empty string) to escape double
-quotes with text columns. Defaults to doubling although backslashes are
-also used.}
+\item{quote_escape}{The type of escaping to use for quoted values, one of
+\code{"double"}, \code{"backslash"} or \code{"none"}. You can also use \code{FALSE}, which is
+equivalent to "none". The default is \code{"double"}, which is expected format
+for Excel.}
 
-\item{col_names}{Whether or not to suppress column names from the table.}
+\item{col_names}{If \code{FALSE}, column names will not be included at the top of
+the file. If \code{TRUE}, column names will be included.}
+
+\item{eol}{The end of line character to use. Most commonly either \code{"\\n"} for
+Unix style newlines, or \code{"\\r\\n"} for Windows style newlines.}
 
 \item{date_format}{The format in which date columns are converted. MDB Tools
 uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_datetime]{readr::parse_date()}}. No need to
 specify whole string. Defaults to ISO8601.}
 }
 \value{
-Invisibly, the path of the new file written.
+Character string, invisible if path to file.
 }
 \description{
 Convert the data of a table into a delimited text string. Save the string as
@@ -46,6 +55,6 @@ it easy to read tables into R or a spreadsheet.
 }
 \examples{
 \dontrun{
-export_mdb(mdb_example(), "Airlines", path = TRUE)
+export_mdb(mdb_example(), "Airlines", output = TRUE)
 }
 }
