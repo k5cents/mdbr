@@ -2,14 +2,14 @@
 % Please edit documentation in R/schema.R
 \name{mdb_schema}
 \alias{mdb_schema}
-\title{Create a column specification from Data Definition Language}
+\title{Specification for columns in a table}
 \usage{
-mdb_schema(file, table = NULL, condense = FALSE)
+mdb_schema(file, table, condense = FALSE)
 }
 \arguments{
 \item{file}{Path to the Microsoft Access file.}
 
-\item{table}{Name of the table, use \code{\link[=mdb_tables]{mdb_tables()}}.}
+\item{table}{Name of the table, list with \code{mdb_tables()}.}
 
 \item{condense}{Should \code{\link[readr:spec]{readr::cols_condense()}} be called on the spec?}
 }
@@ -17,7 +17,8 @@ mdb_schema(file, table = NULL, condense = FALSE)
 A readr cols specification list.
 }
 \description{
-Used to determine the column types for \code{\link[=read_mdb]{read_mdb()}}.
+Used to determine the column types for \code{\link[=read_mdb]{read_mdb()}}. Passed to \code{col_types}
+in \code{readr::read_delim()}.
 }
 \examples{
 \dontrun{
