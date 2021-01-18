@@ -1,6 +1,7 @@
 #' Read a table as data frame
 #'
-#' Convert a table to a temporary text file pass to [readr::read_delim()].
+#' Use [export_mdb()] to write a table as a temporary CSV file, which is then
+#' read as a data frame using [readr::read_delim()].
 #'
 #' @param file Path to the Microsoft Access file.
 #' @param table Name of the table, list with `mdb_tables()`.
@@ -23,16 +24,7 @@ read_mdb <- function(file, table, col_names = TRUE, col_types = NULL, ...) {
   }
   tmp <- tempfile(fileext = ".csv")
   on.exit(unlink(tmp), add = TRUE)
-  system2(
-    command = "mdb-export",
-    stdout = tmp,
-    args = c(
-      ifelse(col_names, "", "-H"),
-      paste("-D", shQuote("%F %T")),
-      shQuote(file),
-      shQuote(table)
-    )
-  )
+  export_mdb(file, table, output = tmp, col_names = col_names)
   if (isTRUE(col_types)) {
     message("Using mdb_schema() for column specification")
     col_types <- mdb_schema(file, table)

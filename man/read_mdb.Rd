@@ -23,7 +23,8 @@ See \code{vignette("readr")} for more details. Use \code{TRUE} to create a gener
 A data frame.
 }
 \description{
-Convert a table to a temporary text file pass to \code{\link[readr:read_delim]{readr::read_delim()}}.
+Use \code{\link[=export_mdb]{export_mdb()}} to write a table as a temporary CSV file, which is then
+read as a data frame using \code{\link[readr:read_delim]{readr::read_delim()}}.
 }
 \examples{
 \dontrun{
