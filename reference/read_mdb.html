@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Read a table as data frame — read_mdb" />
-<meta property="og:description" content="Convert a table to a temporary text file pass to readr::read_delim()." />
+<meta property="og:description" content="Use export_mdb() to write a table as a temporary CSV file, which is then
+read as a data frame using readr::read_delim()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -125,21 +126,11 @@
     </div>
 
     <div class="ref-description">
-    <p>Convert a table to a temporary text file pass to <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_delim()</a></code>.</p>
+    <p>Use <code><a href='export_mdb.html'>export_mdb()</a></code> to write a table as a temporary CSV file, which is then
+read as a data frame using <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_delim()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_mdb</span><span class='op'>(</span>
-  <span class='va'>file</span>,
-  table <span class='op'>=</span> <span class='cn'>NULL</span>,
-  stdout <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>,
-  delim <span class='op'>=</span> <span class='st'>","</span>,
-  quote <span class='op'>=</span> <span class='st'>"\""</span>,
-  quote_escape <span class='op'>=</span> <span class='st'>"\""</span>,
-  col_names <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  date_format <span class='op'>=</span> <span class='st'>"%Y-%m-%d %H:%M:%S"</span>,
-  col_types <span class='op'>=</span> <span class='fu'><a href='mdb_schema.html'>mdb_schema</a></span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>table</span><span class='op'>)</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_mdb</span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>table</span>, col_names <span class='op'>=</span> <span class='cn'>TRUE</span>, col_types <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,43 +141,17 @@
     </tr>
     <tr>
       <th>table</th>
-      <td><p>Name of the table, use <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>stdout</th>
-      <td><p>Where to save the exported text; accepted options are <code>TRUE</code>,
-which creates a character vector in memory, or a file path to write
-(defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempfile()</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>delim</th>
-      <td><p>Single character used to separate fields within a record.</p></td>
-    </tr>
-    <tr>
-      <th>quote</th>
-      <td><p>Single character used to quote strings. Defaults to <code>"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>quote_escape</th>
-      <td><p>A single character (or empty string) to escape double
-quotes with text columns. Defaults to doubling although backslashes are
-also used.</p></td>
+      <td><p>Name of the table, list with <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
     </tr>
     <tr>
       <th>col_names</th>
       <td><p>Whether or not to suppress column names from the table.</p></td>
     </tr>
     <tr>
-      <th>date_format</th>
-      <td><p>The format in which date columns are converted. MDB Tools
-uses the <code><a href='https://rdrr.io/r/base/strptime.html'>strftime(3)</a></code> format, similar to <code><a href='https://readr.tidyverse.org/reference/parse_datetime.html'>readr::parse_date()</a></code>. No need to
-specify whole string. Defaults to ISO8601.</p></td>
-    </tr>
-    <tr>
       <th>col_types</th>
       <td><p>One of <code>NULL</code>, a <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> specification, or a string.
-See <code>vignette("readr")</code> for more details. A generic <code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code>
-specification can be made by <code><a href='mdb_schema.html'>mdb_schema()</a></code> via the <code>mdb-schema</code> utility.</p></td>
+See <code>vignette("readr")</code> for more details. Use <code>TRUE</code> to create a generic
+<code><a href='https://readr.tidyverse.org/reference/cols.html'>readr::cols()</a></code> specification with <code><a href='mdb_schema.html'>mdb_schema()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -200,7 +165,7 @@ specification can be made by <code><a href='mdb_schema.html'>mdb_schema()</a></c
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>read_mdb</span><span class='op'>(</span><span class='fu'><a href='mdb_example.html'>mdb_example</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"Flights"</span><span class='op'>)</span>
+<span class='fu'>read_mdb</span><span class='op'>(</span><span class='fu'><a href='mdb_example.html'>mdb_example</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"Airlines"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

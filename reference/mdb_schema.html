@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a column specification from Data Definition Language — mdb_schema • mdbr</title>
+<title>Specification for columns in a table — mdb_schema • mdbr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,9 @@
 
 
 
-<meta property="og:title" content="Create a column specification from Data Definition Language — mdb_schema" />
-<meta property="og:description" content="Used to determine the column types for read_mdb()." />
+<meta property="og:title" content="Specification for columns in a table — mdb_schema" />
+<meta property="og:description" content="Used to determine the column types for read_mdb(). Passed to col_types
+in readr::read_delim()." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,16 +120,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a column specification from Data Definition Language</h1>
+    <h1>Specification for columns in a table</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/mdbr/blob/master/R/schema.R'><code>R/schema.R</code></a></small>
     <div class="hidden name"><code>mdb_schema.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Used to determine the column types for <code><a href='read_mdb.html'>read_mdb()</a></code>.</p>
+    <p>Used to determine the column types for <code><a href='read_mdb.html'>read_mdb()</a></code>. Passed to <code>col_types</code>
+in <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_delim()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mdb_schema</span><span class='op'>(</span><span class='va'>file</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, condense <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mdb_schema</span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>table</span>, condense <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,7 +141,7 @@
     </tr>
     <tr>
       <th>table</th>
-      <td><p>Name of the table, use <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
+      <td><p>Name of the table, list with <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
     </tr>
     <tr>
       <th>condense</th>

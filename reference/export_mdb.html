@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Save an Access database table as a text file — export_mdb • mdbr</title>
+<title>Export an Access database table as a text file — export_mdb • mdbr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Save an Access database table as a text file — export_mdb" />
+<meta property="og:title" content="Export an Access database table as a text file — export_mdb" />
 <meta property="og:description" content="Convert the data of a table into a delimited text string. Save the string as
 a character vector or write it to a text file. This direct conversion makes
 it easy to read tables into R or a spreadsheet." />
@@ -121,7 +121,7 @@ it easy to read tables into R or a spreadsheet." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Save an Access database table as a text file</h1>
+    <h1>Export an Access database table as a text file</h1>
     <small class="dont-index">Source: <a href='https://github.com/kiernann/mdbr/blob/master/R/export.R'><code>R/export.R</code></a></small>
     <div class="hidden name"><code>export_mdb.Rd</code></div>
     </div>
@@ -134,12 +134,13 @@ it easy to read tables into R or a spreadsheet.</p>
 
     <pre class="usage"><span class='fu'>export_mdb</span><span class='op'>(</span>
   <span class='va'>file</span>,
-  table <span class='op'>=</span> <span class='cn'>NULL</span>,
-  path <span class='op'>=</span> <span class='st'>""</span>,
+  <span class='va'>table</span>,
+  output <span class='op'>=</span> <span class='cn'>TRUE</span>,
   delim <span class='op'>=</span> <span class='st'>","</span>,
   quote <span class='op'>=</span> <span class='st'>"\""</span>,
-  quote_escape <span class='op'>=</span> <span class='st'>"\""</span>,
+  quote_escape <span class='op'>=</span> <span class='st'>"double"</span>,
   col_names <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  eol <span class='op'>=</span> <span class='st'>"\n"</span>,
   date_format <span class='op'>=</span> <span class='st'>"%Y-%m-%d %H:%M:%S"</span>
 <span class='op'>)</span></pre>
 
@@ -152,15 +153,18 @@ it easy to read tables into R or a spreadsheet.</p>
     </tr>
     <tr>
       <th>table</th>
-      <td><p>Name of the table, use <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
+      <td><p>Name of the table, list with <code><a href='mdb_tables.html'>mdb_tables()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>path</th>
-      <td><p>Path or connection to write to. Empty string prints to console.</p></td>
+      <th>output</th>
+      <td><p>Path or connection to write to. Passed to the <code>stdout</code> argument
+of <code><a href='https://rdrr.io/r/base/system2.html'>system2()</a></code>. Possible values are "", to the R console (the default),
+<code>NULL</code> or <code>FALSE</code> (discard output), <code>TRUE</code> (capture the output in a
+character vector) or a character string naming a file.</p></td>
     </tr>
     <tr>
       <th>delim</th>
-      <td><p>Single character used to separate fields within a record.</p></td>
+      <td><p>Delimiter used to separate values.</p></td>
     </tr>
     <tr>
       <th>quote</th>
@@ -168,13 +172,20 @@ it easy to read tables into R or a spreadsheet.</p>
     </tr>
     <tr>
       <th>quote_escape</th>
-      <td><p>A single character (or empty string) to escape double
-quotes with text columns. Defaults to doubling although backslashes are
-also used.</p></td>
+      <td><p>The type of escaping to use for quoted values, one of
+<code>"double"</code>, <code>"backslash"</code> or <code>"none"</code>. You can also use <code>FALSE</code>, which is
+equivalent to "none". The default is <code>"double"</code>, which is expected format
+for Excel.</p></td>
     </tr>
     <tr>
       <th>col_names</th>
-      <td><p>Whether or not to suppress column names from the table.</p></td>
+      <td><p>If <code>FALSE</code>, column names will not be included at the top of
+the file. If <code>TRUE</code>, column names will be included.</p></td>
+    </tr>
+    <tr>
+      <th>eol</th>
+      <td><p>The end of line character to use. Most commonly either <code>"\n"</code> for
+Unix style newlines, or <code>"\r\n"</code> for Windows style newlines.</p></td>
     </tr>
     <tr>
       <th>date_format</th>
@@ -186,11 +197,11 @@ specify whole string. Defaults to ISO8601.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Invisibly, the path of the new file written.</p>
+    <p>Character string, invisible if path to file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>export_mdb</span><span class='op'>(</span><span class='fu'><a href='mdb_example.html'>mdb_example</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"Airlines"</span>, path <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'>export_mdb</span><span class='op'>(</span><span class='fu'><a href='mdb_example.html'>mdb_example</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"Airlines"</span>, output <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>
