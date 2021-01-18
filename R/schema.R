@@ -29,16 +29,13 @@ mdb_schema <- function(file, table, condense = FALSE) {
   x <- gsub(",\\s$", "", x)
   x <- gsub("\\[|\\]", "", x)
   x <- gsub("\\s\\(\\d+\\)$", "", x)
-  con <- textConnection(x)
-  on.exit(close(con), add = TRUE)
-  y <- read.delim(
-    file = con,
-    sep = "|",
-    header = FALSE,
-    col.names = c("field", "type")
+  y <- matrix(
+    data = unlist(strsplit(x, "\\|")),
+    ncol = 2,
+    byrow = TRUE
   )
-  z <- vapply(y$type, list_switch, character(1), mdb_col_types)
-  names(z) <- y$field
+  z <- vapply(y[, 2], list_switch, character(1), mdb_col_types)
+  names(z) <- y[, 1]
   spec <- readr::as.col_spec(z)
   if (isTRUE(condense)) {
     readr::cols_condense(spec)
