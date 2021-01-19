@@ -13,5 +13,5 @@ mdb_tables(file)
 A character vector of table names.
 }
 \description{
-Used to find table names for \code{read_mdb()}.
+List tables in a Microsoft Access database
 }
