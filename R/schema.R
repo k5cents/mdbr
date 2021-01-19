@@ -28,7 +28,8 @@ mdb_schema <- function(file, table, condense = FALSE) {
   x <- gsub("^\t", "", x)
   x <- gsub(",\\s$", "", x)
   x <- gsub("\\[|\\]", "", x)
-  x <- gsub("\\s\\(\\d+\\)$", "", x)
+  x <- gsub("\\s\\(\\d+\\).*", "", x)
+  x <- gsub("\\sNOT NULL", "", x)
   y <- matrix(
     data = unlist(strsplit(x, "\\|")),
     ncol = 2,
