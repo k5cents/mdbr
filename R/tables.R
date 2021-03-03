@@ -6,7 +6,7 @@
 mdb_tables <- function(file) {
   check_mdb_tools()
   system2(
-    command = "mdb-tables",
+    command = Sys.which("mdb-tables"),
     args = c("-1", shQuote(file)),
     stdout = TRUE
   )

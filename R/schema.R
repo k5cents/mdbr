@@ -19,7 +19,7 @@ mdb_schema <- function(file, table, condense = FALSE) {
     stop("Must define a table name, list with mdb_tables()", call. = FALSE)
   }
   x <- system2(
-    command = "mdb-schema",
+    command = Sys.which("mdb-schema"),
     args = c(file, paste("-T", shQuote(table))),
     stdout = TRUE
   )

@@ -43,7 +43,7 @@ export_mdb <- function(file, table, output = TRUE, delim = ",",
     none = ""
   )
   out <- system2(
-    command = "mdb-export",
+    command = Sys.which("mdb-export"),
     stdout = output,
     args = c(
       ifelse(!col_names, shQuote("-H"), ""),
