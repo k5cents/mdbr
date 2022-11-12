@@ -1,6 +1,12 @@
 # mdbr 0.2.0
 
-# mdbr 0.1.2
+* Functions now quote their input files with `shQuote()`. (#7)
+* `export_mdb()` now mirrors `readr::format_csv()` with arguments, etc.
+* Remove all formatting arguments for `read_mdb()` (with smart hidden defaults).
+* Add more schema types with readr equivalents. 
+* Write schema to a matrix in-memory rather than a temporary file.
+* Always read data from a temporary file instead of `stdout` option.
+* Add better checking if mdbtools is installed.
 
 # mdbr 0.1.1
 
