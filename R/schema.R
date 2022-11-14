@@ -20,7 +20,7 @@ mdb_schema <- function(file, table, condense = FALSE) {
   }
   x <- system2(
     command = Sys.which("mdb-schema"),
-    args = c(file, paste("-T", shQuote(table))),
+    args = c(shQuote(file), paste("-T", shQuote(table))),
     stdout = TRUE
   )
   x <- grep("^\t", x, value = TRUE)
