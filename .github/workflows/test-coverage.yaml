@@ -26,6 +26,9 @@ jobs:
           extra-packages: any::covr
           needs: coverage
 
+      - name: Install mdbtools
+        run: sudo apt-get install mdbtools
+
       - name: Test coverage
         run: |
           covr::codecov(
