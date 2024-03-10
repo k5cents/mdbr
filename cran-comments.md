@@ -1,5 +1,6 @@
 ## Test environments
-* local R installation (ubuntu 22.10), R 4.2.1
+
+* local: ubuntu 22.04.4, R 4.1.2
 * [ubuntu][gh_act] 18.04 (on github-actions), R 4.0.0
 * [rhub][rhub_win]: Fedora Linux, R-devel, clang, gfortran
 * [rhub][rhub_ubu]: Ubuntu Linux 16.04 LTS, R-release, GCC
@@ -10,6 +11,12 @@ Tests and example do not run remotely, as the mdbtools software is needed.
 ## R CMD check results
 
 0 errors | 0 warnings
+
+# Submission
+
+* Update email from kiernann@pronmail.com to k5cents@gmail.com
+* Update URLs from kiernann.com to k5cents.com
+* Update Github from @kiernann to @k5cents
 
 ## System Requirments
 
@@ -24,7 +31,7 @@ instructions. The tools are also found on package managers:
 Source code: https://github.com/mdbtools/mdbtools/archive/0.7.1.tar.gz
 
 <!-- links: start -->
-[gh_act]: https://github.com/kiernann/mdbr/actions
+[gh_act]: https://github.com/k5cents/mdbr/actions
 [rhub_win]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-b4490e7b655f472fa88ed1abe473320b
 [rhub_ubu]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-66a7afa7897f43538970e18ca03ac013
 [rhub_fed]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-b4490e7b655f472fa88ed1abe473320b

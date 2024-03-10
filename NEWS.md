@@ -1,3 +1,7 @@
+# mdbr 0.2.1
+
+* Update maintainer email, website URL, and GitHub URL.
+
 # mdbr 0.2.0
 
 * Functions now quote their input files with `shQuote()`. (#7)
