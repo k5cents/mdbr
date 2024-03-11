@@ -10,10 +10,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/mdbr)](https://CRAN.R-project.org/package=mdbr)
 [![Codecov test
-coverage](https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg)](https://codecov.io/gh/kiernann/mdbr?branch=master)
+coverage](https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg)](https://codecov.io/gh/k5cents/mdbr?branch=master)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mdbr) [![R
 build
-status](https://github.com/kiernann/mdbr/workflows/R-CMD-check/badge.svg)](https://github.com/kiernann/mdbr/actions)
+status](https://github.com/k5cents/mdbr/workflows/R-CMD-check/badge.svg)](https://github.com/k5cents/mdbr/actions)
+[![R-CMD-check](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB
@@ -32,11 +33,11 @@ install.packages("mdbr")
 ```
 
 The development version can be installed from
-[GitHub](https://github.com/kiernann/mdbr).
+[GitHub](https://github.com/k5cents/mdbr).
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("kiernann/mdbr")
+remotes::install_github("k5cents/mdbr")
 ```
 
 The user must install [MDB Tools](https://github.com/mdbtools/mdbtools)
@@ -96,7 +97,7 @@ Tables can be easily converted to a temporary file and read immediately.
 
 ``` r
 read_mdb(ex, "Airports")
-#> # A tibble: 1,458 x 8
+#> # A tibble: 1,458 × 8
 #>    faa   name                             lat    lon   alt    tz dst   tzone              
 #>    <chr> <chr>                          <dbl>  <dbl> <dbl> <dbl> <chr> <chr>              
 #>  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
@@ -109,7 +110,7 @@ read_mdb(ex, "Airports")
 #>  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   
 #>  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   
 #> 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles
-#> # … with 1,448 more rows
+#> # ℹ 1,448 more rows
 ```
 
 When reading a converted table, you might need to know what types of
@@ -156,5 +157,4 @@ mdb_schema(ex, "Airports", condense = TRUE)
 ```
 
 <!-- refs: start -->
-
 <!-- refs: end -->

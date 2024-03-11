@@ -26,7 +26,7 @@ if (!interactive()) {
 [![Codecov test coverage][cov_badge]][cov_link]
 ![Downloads][dl_badge]
 [![R build status][ga_badge]][ga_link]
-[![R-CMD-check](https://github.com/kiernann/mdbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kiernann/mdbr/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB Tools][mdbt] written
@@ -46,7 +46,7 @@ The development version can be installed from [GitHub][gh].
 
 ```{r github, eval=FALSE}
 # install.packages("remotes")
-remotes::install_github("kiernann/mdbr")
+remotes::install_github("k5cents/mdbr")
 ```
 
 The user must install [MDB Tools][mdbt] separately. Users on Debian systems can
@@ -128,13 +128,13 @@ mdb_schema(ex, "Airports", condense = TRUE)
 [life_link]: https://www.tidyverse.org/lifecycle/#experimental
 [cran_badge]: https://www.r-pkg.org/badges/version/mdbr
 [cran_link]: https://CRAN.R-project.org/package=mdbr
-[ga_badge]: https://github.com/kiernann/mdbr/workflows/R-CMD-check/badge.svg
-[ga_link]: https://github.com/kiernann/mdbr/actions
-[cov_badge]: https://img.shields.io/codecov/c/github/kiernann/mdbr/master.svg
-[cov_link]: https://codecov.io/gh/kiernann/mdbr?branch=master
+[ga_badge]: https://github.com/k5cents/mdbr/workflows/R-CMD-check/badge.svg
+[ga_link]: https://github.com/k5cents/mdbr/actions
+[cov_badge]: https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg
+[cov_link]: https://codecov.io/gh/k5cents/mdbr?branch=master
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
 [mdbt]: https://github.com/mdbtools/mdbtools
-[gh]:  https://github.com/kiernann/mdbr
+[gh]:  https://github.com/k5cents/mdbr
 [cran]:  https://cran.r-project.org/package=mdbr
 [readme]: https://github.com/mdbtools/mdbtools/blob/dev/README.md
 [nycf]: https://github.com/hadley/nycflights13
