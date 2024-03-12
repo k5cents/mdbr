@@ -14,6 +14,7 @@ Tests and example do not run remotely, as the mdbtools software is needed.
 
 # Submission
 
+* Update invalid and redirected URLs.
 * Update email from kiernann@pronmail.com to k5cents@gmail.com
 * Update URLs from kiernann.com to k5cents.com
 * Update Github from @kiernann to @k5cents

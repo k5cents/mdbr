@@ -49,11 +49,17 @@ The development version can be installed from [GitHub][gh].
 remotes::install_github("k5cents/mdbr")
 ```
 
-The user must install [MDB Tools][mdbt] separately. Users on Debian systems can
-install the tools from the apt repository.
+The user must install [MDB Tools][mdbt] separately. For example, users on 
+Debian systems can install the tools from the apt repository.
 
 ```bash
 sudo apt install mdbtools
+```
+
+On MacOS, the tools can be installed using homebrew.
+
+```bash
+brew install mdbtools
 ```
 
 More installation methods can be found on the package's [README][readme].
@@ -77,7 +83,7 @@ mdb_tables(ex <- mdb_example())
 These tables can be exported as a delimited string or file.
 
 ```{r export}
-string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
 cat(string)
 ```
 
@@ -125,18 +131,18 @@ mdb_schema(ex, "Airports", condense = TRUE)
 
 <!-- refs: start -->
 [life_badge]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
-[life_link]: https://www.tidyverse.org/lifecycle/#experimental
+[life_link]: https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [cran_badge]: https://www.r-pkg.org/badges/version/mdbr
 [cran_link]: https://CRAN.R-project.org/package=mdbr
 [ga_badge]: https://github.com/k5cents/mdbr/workflows/R-CMD-check/badge.svg
 [ga_link]: https://github.com/k5cents/mdbr/actions
 [cov_badge]: https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg
-[cov_link]: https://codecov.io/gh/k5cents/mdbr?branch=master
+[cov_link]: https://app.codecov.io/gh/k5cents/mdbr?branch=master
 [dl_badge]: https://cranlogs.r-pkg.org/badges/grand-total/mdbr
 [mdbt]: https://github.com/mdbtools/mdbtools
-[gh]:  https://github.com/k5cents/mdbr
+[gh]:  https://github.com/k5cents/mdbr/
 [cran]:  https://cran.r-project.org/package=mdbr
 [readme]: https://github.com/mdbtools/mdbtools/blob/dev/README.md
-[nycf]: https://github.com/hadley/nycflights13
+[nycf]: https://github.com/tidyverse/nycflights13
 [spec]: https://readr.tidyverse.org/reference/spec.html
 <!-- refs: end -->

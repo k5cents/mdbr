@@ -11,6 +11,6 @@ mdb_example(path = "nycflights13.mdb")
 }
 \description{
 mdbr comes bundled with a sample file from the
-\href{https://github.com/hadley/nycflights13}{nycflights13} package in its
+\href{https://github.com/tidyverse/nycflights13}{nycflights13} package in its
 inst/extdata directory. This function make it easy to access.
 }

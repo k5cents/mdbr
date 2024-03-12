@@ -9,7 +9,7 @@ Description: Use the open source 'MDB Tools' utilities
     proprietary Microsoft Access files to simple text files and then
     reading those as data frames.
 License: GPL-3
-URL: https://k5cents.github.io/mdbr, https://github.com/k5cents/mdbr
+URL: https://k5cents.github.io/mdbr/, https://github.com/k5cents/mdbr
 BugReports: https://github.com/k5cents/mdbr/issues
 Imports: 
     readr
@@ -17,5 +17,5 @@ Suggests:
     testthat
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 SystemRequirements: mdbtools: mdbtools (deb).

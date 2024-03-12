@@ -6,11 +6,11 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental))
 [![CRAN
 status](https://www.r-pkg.org/badges/version/mdbr)](https://CRAN.R-project.org/package=mdbr)
 [![Codecov test
-coverage](https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg)](https://codecov.io/gh/k5cents/mdbr?branch=master)
+coverage](https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg)](https://app.codecov.io/gh/k5cents/mdbr?branch=master)
 ![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/mdbr) [![R
 build
 status](https://github.com/k5cents/mdbr/workflows/R-CMD-check/badge.svg)](https://github.com/k5cents/mdbr/actions)
@@ -33,7 +33,7 @@ install.packages("mdbr")
 ```
 
 The development version can be installed from
-[GitHub](https://github.com/k5cents/mdbr).
+[GitHub](https://github.com/k5cents/mdbr/).
 
 ``` r
 # install.packages("remotes")
@@ -41,11 +41,17 @@ remotes::install_github("k5cents/mdbr")
 ```
 
 The user must install [MDB Tools](https://github.com/mdbtools/mdbtools)
-separately. Users on Debian systems can install the tools from the apt
-repository.
+separately. For example, users on Debian systems can install the tools
+from the apt repository.
 
 ``` bash
 sudo apt install mdbtools
+```
+
+On MacOS, the tools can be installed using homebrew.
+
+``` bash
+brew install mdbtools
 ```
 
 More installation methods can be found on the package’s
@@ -59,7 +65,7 @@ library(readr)
 ```
 
 The package comes with a version of the
-[nycflights13](https://github.com/hadley/nycflights13) relational
+[nycflights13](https://github.com/tidyverse/nycflights13) relational
 database found with `mdb_examples()`.
 
 The tables in a database can be listed with `mdb_tables()`.
@@ -72,25 +78,9 @@ mdb_tables(ex <- mdb_example())
 These tables can be exported as a delimited string or file.
 
 ``` r
-string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
 cat(string)
-#> carrier|name
-#> '9E'|'Endeavor Air Inc.'
-#> 'AA'|'American Airlines Inc.'
-#> 'AS'|'Alaska Airlines Inc.'
-#> 'B6'|'JetBlue Airways'
-#> 'DL'|'Delta Air Lines Inc.'
-#> 'EV'|'ExpressJet Airlines Inc.'
-#> 'F9'|'Frontier Airlines Inc.'
-#> 'FL'|'AirTran Airways Corporation'
-#> 'HA'|'Hawaiian Airlines Inc.'
-#> 'MQ'|'Envoy Air'
-#> 'OO'|'SkyWest Airlines Inc.'
-#> 'UA'|'United Air Lines Inc.'
-#> 'US'|'US Airways Inc.'
-#> 'VX'|'Virgin America'
-#> 'WN'|'Southwest Airlines Co.'
-#> 'YV'|'Mesa Airlines Inc.'
+#> carrier|name '9E'|'Endeavor Air Inc.' 'AA'|'American Airlines Inc.' 'AS'|'Alaska Airlines Inc.' 'B6'|'JetBlue Airways' 'DL'|'Delta Air Lines Inc.' 'EV'|'ExpressJet Airlines Inc.' 'F9'|'Frontier Airlines Inc.' 'FL'|'AirTran Airways Corporation' 'HA'|'Hawaiian Airlines Inc.' 'MQ'|'Envoy Air' 'OO'|'SkyWest Airlines Inc.' 'UA'|'United Air Lines Inc.' 'US'|'US Airways Inc.' 'VX'|'Virgin America' 'WN'|'Southwest Airlines Co.' 'YV'|'Mesa Airlines Inc.'
 ```
 
 Tables can be easily converted to a temporary file and read immediately.
@@ -99,7 +89,7 @@ Tables can be easily converted to a temporary file and read immediately.
 read_mdb(ex, "Airports")
 #> # A tibble: 1,458 × 8
 #>    faa   name                             lat    lon   alt    tz dst   tzone              
-#>    <chr> <chr>                          <dbl>  <dbl> <dbl> <dbl> <chr> <chr>              
+#>    <chr> <chr>                          <dbl>  <dbl> <int> <int> <chr> <chr>              
 #>  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
 #>  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
 #>  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
