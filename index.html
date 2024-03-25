@@ -111,8 +111,24 @@
 <p>These tables can be exported as a delimited string or file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airlines"</span>, path <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">string</span><span class="op">)</span></span>
-<span><span class="co">#&gt; carrier|name '9E'|'Endeavor Air Inc.' 'AA'|'American Airlines Inc.' 'AS'|'Alaska Airlines Inc.' 'B6'|'JetBlue Airways' 'DL'|'Delta Air Lines Inc.' 'EV'|'ExpressJet Airlines Inc.' 'F9'|'Frontier Airlines Inc.' 'FL'|'AirTran Airways Corporation' 'HA'|'Hawaiian Airlines Inc.' 'MQ'|'Envoy Air' 'OO'|'SkyWest Airlines Inc.' 'UA'|'United Air Lines Inc.' 'US'|'US Airways Inc.' 'VX'|'Virgin America' 'WN'|'Southwest Airlines Co.' 'YV'|'Mesa Airlines Inc.'</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">string</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; carrier|name</span></span>
+<span><span class="co">#&gt; '9E'|'Endeavor Air Inc.'</span></span>
+<span><span class="co">#&gt; 'AA'|'American Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'AS'|'Alaska Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'B6'|'JetBlue Airways'</span></span>
+<span><span class="co">#&gt; 'DL'|'Delta Air Lines Inc.'</span></span>
+<span><span class="co">#&gt; 'EV'|'ExpressJet Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'F9'|'Frontier Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'FL'|'AirTran Airways Corporation'</span></span>
+<span><span class="co">#&gt; 'HA'|'Hawaiian Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'MQ'|'Envoy Air'</span></span>
+<span><span class="co">#&gt; 'OO'|'SkyWest Airlines Inc.'</span></span>
+<span><span class="co">#&gt; 'UA'|'United Air Lines Inc.'</span></span>
+<span><span class="co">#&gt; 'US'|'US Airways Inc.'</span></span>
+<span><span class="co">#&gt; 'VX'|'Virgin America'</span></span>
+<span><span class="co">#&gt; 'WN'|'Southwest Airlines Co.'</span></span>
+<span><span class="co">#&gt; 'YV'|'Mesa Airlines Inc.'</span></span></code></pre></div>
 <p>Tables can be easily converted to a temporary file and read immediately.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/read_mdb.html">read_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span></span>
