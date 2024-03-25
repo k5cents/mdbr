@@ -79,8 +79,24 @@ These tables can be exported as a delimited string or file.
 
 ``` r
 string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
-cat(string)
-#> carrier|name '9E'|'Endeavor Air Inc.' 'AA'|'American Airlines Inc.' 'AS'|'Alaska Airlines Inc.' 'B6'|'JetBlue Airways' 'DL'|'Delta Air Lines Inc.' 'EV'|'ExpressJet Airlines Inc.' 'F9'|'Frontier Airlines Inc.' 'FL'|'AirTran Airways Corporation' 'HA'|'Hawaiian Airlines Inc.' 'MQ'|'Envoy Air' 'OO'|'SkyWest Airlines Inc.' 'UA'|'United Air Lines Inc.' 'US'|'US Airways Inc.' 'VX'|'Virgin America' 'WN'|'Southwest Airlines Co.' 'YV'|'Mesa Airlines Inc.'
+cat(string, sep = "\n")
+#> carrier|name
+#> '9E'|'Endeavor Air Inc.'
+#> 'AA'|'American Airlines Inc.'
+#> 'AS'|'Alaska Airlines Inc.'
+#> 'B6'|'JetBlue Airways'
+#> 'DL'|'Delta Air Lines Inc.'
+#> 'EV'|'ExpressJet Airlines Inc.'
+#> 'F9'|'Frontier Airlines Inc.'
+#> 'FL'|'AirTran Airways Corporation'
+#> 'HA'|'Hawaiian Airlines Inc.'
+#> 'MQ'|'Envoy Air'
+#> 'OO'|'SkyWest Airlines Inc.'
+#> 'UA'|'United Air Lines Inc.'
+#> 'US'|'US Airways Inc.'
+#> 'VX'|'Virgin America'
+#> 'WN'|'Southwest Airlines Co.'
+#> 'YV'|'Mesa Airlines Inc.'
 ```
 
 Tables can be easily converted to a temporary file and read immediately.
