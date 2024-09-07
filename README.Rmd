@@ -26,7 +26,6 @@ if (!interactive()) {
 [![Codecov test coverage][cov_badge]][cov_link]
 ![Downloads][dl_badge]
 [![R build status][ga_badge]][ga_link]
-[![R-CMD-check](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB Tools][mdbt] written
@@ -49,8 +48,9 @@ The development version can be installed from [GitHub][gh].
 remotes::install_github("k5cents/mdbr")
 ```
 
-The user must install [MDB Tools][mdbt] separately. For example, users on 
-Debian systems can install the tools from the apt repository.
+> [!IMPORTANT]  
+> The user must install [MDB Tools][mdbt] separately. For example, users on 
+> Debian systems can install the tools from the apt repository.
 
 ```bash
 sudo apt install mdbtools
