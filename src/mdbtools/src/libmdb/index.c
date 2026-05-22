@@ -25,7 +25,7 @@
 static MdbIndexPage *mdb_index_read_bottom_pg(MdbHandle *mdb, MdbIndex *idx, MdbIndexChain *chain);
 static MdbIndexPage *mdb_chain_add_page(MdbHandle *mdb, MdbIndexChain *chain, guint32 pg);
 
-char idx_to_text[] = {
+unsigned char idx_to_text[] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 0-7     0x00-0x07 */
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 8-15    0x09-0x0f */
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, /* 16-23   0x10-0x17 */
@@ -410,7 +410,7 @@ mdb_index_hash_text(MdbHandle *mdb, char *text, char *hash)
 	}
 	else
 	{
-		transtbl = idx_to_text;
+		transtbl = (char*)idx_to_text;
 	}
 	if (transtbl)
 	{

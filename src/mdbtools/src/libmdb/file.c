@@ -374,7 +374,7 @@ static ssize_t _mdb_read_pg(MdbHandle *mdb, void *pg_buf, unsigned long pg)
 		perror("read");
 		return 0;
 	}
-    memset(pg_buf + len, 0, mdb->fmt->pg_size - len);
+    memset((char*)pg_buf + len, 0, mdb->fmt->pg_size - len);
 	/*
 	 * unencrypt the page if necessary.
 	 * it might make sense to cache the unencrypted data blocks?

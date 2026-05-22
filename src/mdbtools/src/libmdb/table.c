@@ -176,7 +176,7 @@ void *
 read_pg_if_n(MdbHandle *mdb, void *buf, int *cur_pos, size_t len)
 {
 	char* _buf = buf;
-	char* _end = buf ? buf + len : NULL;
+	char* _end = buf ? (char*)buf + len : NULL;
 
 	if (*cur_pos < 0)
 		return NULL;
