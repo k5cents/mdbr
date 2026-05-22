@@ -9,9 +9,22 @@
 <url><loc>/news/index.html</loc></url>
 <url><loc>/reference/export_mdb.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/mdb.html</loc></url>
+<url><loc>/reference/mdb_array.html</loc></url>
+<url><loc>/reference/mdb_count.html</loc></url>
 <url><loc>/reference/mdb_example.html</loc></url>
+<url><loc>/reference/mdb_export.html</loc></url>
+<url><loc>/reference/mdb_header.html</loc></url>
+<url><loc>/reference/mdb_hexdump.html</loc></url>
+<url><loc>/reference/mdb_import.html</loc></url>
+<url><loc>/reference/mdb_json.html</loc></url>
+<url><loc>/reference/mdb_prop.html</loc></url>
+<url><loc>/reference/mdb_queries.html</loc></url>
 <url><loc>/reference/mdb_schema.html</loc></url>
+<url><loc>/reference/mdb_sql.html</loc></url>
 <url><loc>/reference/mdb_tables.html</loc></url>
+<url><loc>/reference/mdb_ver.html</loc></url>
+<url><loc>/reference/print.mdblist.html</loc></url>
 <url><loc>/reference/read_mdb.html</loc></url>
 </urlset>
 

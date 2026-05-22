@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
@@ -47,6 +47,55 @@
       <small>Source: <a href="https://github.com/k5cents/mdbr/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0" id="mdbr-030">mdbr 0.3.0<a class="anchor" aria-label="anchor" href="#mdbr-030"></a></h2>
+<ul><li>
+<strong>Bundled mdbtools</strong>: The mdbtools C library is now compiled and shipped with the package (<code>src/mdbtools/</code>). No external <code>mdbtools</code> installation is required.</li>
+<li>
+<strong>DBI interface</strong>: A full read-only DBI backend is now available. Use <code>DBI::dbConnect(mdb(), dbname = "path/to/file.mdb")</code> to open connections and standard DBI verbs (<code>dbReadTable()</code>, <code>dbGetQuery()</code>, <code>dbListTables()</code>, etc.).</li>
+<li>
+<strong>New helper functions</strong> from the bundled library:
+<ul><li>
+<code><a href="../reference/mdb_sql.html">mdb_sql()</a></code> — run SQL queries directly against an MDB/ACCDB file.</li>
+<li>
+<code><a href="../reference/mdb_queries.html">mdb_queries()</a></code> — list saved Access queries and retrieve their SQL.</li>
+<li>
+<code><a href="../reference/mdb_count.html">mdb_count()</a></code> — count rows in a table, optionally with a <code>WHERE</code> clause.</li>
+<li>
+<code><a href="../reference/mdb_schema.html">mdb_schema()</a></code> — generate DDL (CREATE TABLE) schema in various SQL dialects with <code>mode = "ddl"</code>.</li>
+<li>
+<code><a href="../reference/mdb_ver.html">mdb_ver()</a></code> — return the file format or the mdbtools library version.</li>
+<li>
+<code><a href="../reference/mdb_array.html">mdb_array()</a></code> — export a table as a named list of column vectors.</li>
+<li>
+<code><a href="../reference/mdb_export.html">mdb_export()</a></code> — export a table to CSV or SQL INSERT statements.</li>
+<li>
+<code><a href="../reference/mdb_json.html">mdb_json()</a></code> — export a table to JSON.</li>
+<li>
+<code><a href="../reference/mdb_header.html">mdb_header()</a></code> — return a structural summary (version, tables, queries).</li>
+<li>
+<code><a href="../reference/mdb_hexdump.html">mdb_hexdump()</a></code> — hexadecimal dump of MDB file bytes.</li>
+<li>
+<code><a href="../reference/mdb_import.html">mdb_import()</a></code> — stub (read-only; always errors with a clear message).</li>
+<li>
+<code><a href="../reference/mdb_prop.html">mdb_prop()</a></code> — retrieve MDB object properties.</li>
+<li>
+<code>print.mdblist</code> — pretty-printer for <code>mdblist</code> objects.</li>
+</ul></li>
+<li>
+<strong>No external dependencies</strong>: <code>readr</code> has been removed. <code><a href="../reference/read_mdb.html">read_mdb()</a></code> now reads tables directly via the bundled C library with automatic type coercion (integer, double, logical, POSIXct for DateTime, character otherwise).</li>
+<li>
+<strong><code><a href="../reference/mdb_schema.html">mdb_schema()</a></code></strong> now covers both column-type inspection (default, backward-compatible with mdbr &lt;= 0.2.1) and DDL generation (<code>mode = "ddl"</code>)</li>
+<li>
+<strong>Backward-compatible</strong>: <code><a href="../reference/read_mdb.html">read_mdb()</a></code>, <code><a href="../reference/export_mdb.html">export_mdb()</a></code>, <code><a href="../reference/mdb_tables.html">mdb_tables()</a></code>, and <code><a href="../reference/mdb_example.html">mdb_example()</a></code> function signatures are unchanged.</li>
+<li>
+<code><a href="../reference/mdb_tables.html">mdb_tables()</a></code> gains additional optional arguments (<code>system</code>, <code>type</code>, <code>show_type</code>, <code>as_text</code>, <code>single_column</code>, <code>delimiter</code>) matching the <code>mdb-tables</code> CLI surface.</li>
+<li>
+<strong><code><a href="../reference/read_mdb.html">read_mdb()</a></code></strong> now returns a <code>tibble</code>. The <code>col_types</code> and <code>...</code> arguments are deprecated with a lifecycle warning; they had no effect with the native read path.</li>
+<li>
+<strong>CI</strong>: macOS and Windows are now part of the check matrix; no external mdbtools install step is needed.</li>
+<li>Bruno Tremblay (Boostao) added as co-author for the DBI interface and bundled mdbtools integration (originally developed in the <code>mdbtoolr</code> package).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.1" id="mdbr-021">mdbr 0.2.1<small>2024-03-12</small><a class="anchor" aria-label="anchor" href="#mdbr-021"></a></h2>
 <ul><li>Update maintainer email, website URL, and GitHub URL.</li>
@@ -92,7 +141,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

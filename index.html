@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Work with Microsoft Access Files">
-<meta property="og:description" content="Use the open source MDB Tools utilities &lt;https://github.com/mdbtools/mdbtools/&gt;. Primarily used for converting proprietary Microsoft Access files to simple text files and then reading those as data frames.">
+<meta property="og:description" content="Work with Microsoft Access .mdb and .accdb files using the open source MDB Tools library &lt;https://github.com/mdbtools/mdbtools/&gt;. The library is compiled and bundled with the package, so no external installation is required. Provides high-level helpers for reading tables, exporting to CSV or JSON, inspecting schemas, and running SQL queries. Also exposes a full read-only DBI interface for use with standard database workflows.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
@@ -71,7 +71,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of mdbr is to easily access the open source <a href="https://github.com/mdbtools/mdbtools" class="external-link">MDB Tools</a> written by Brian Bruns. The MDB Tools command line utilities take proprietary Microsoft Access files and convert them to standard text files. This package is experimental and has only been tested on simple MDB databases.</p>
+<p>The goal of mdbr is to easily access the open source <a href="https://github.com/mdbtools/mdbtools" class="external-link">MDB Tools</a> written by Brian Bruns. The MDB Tools C library is now bundled with the package — no external installation is required. This package reads proprietary Microsoft Access files directly and returns standard R data frames.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -82,26 +82,20 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"k5cents/mdbr"</span><span class="op">)</span></span></code></pre></div>
-<p>The user must install <a href="https://github.com/mdbtools/mdbtools" class="external-link">MDB Tools</a> separately. For example, users on Debian systems can install the tools from the apt repository.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">sudo</span> apt install mdbtools</span></code></pre></div>
-<p>On MacOS, the tools can be installed using homebrew.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">brew</span> install mdbtools</span></code></pre></div>
-<p>More installation methods can be found on the package’s <a href="https://github.com/mdbtools/mdbtools/blob/dev/README.md" class="external-link">README</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://k5cents.github.io/mdbr/" class="external-link">mdbr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://k5cents.github.io/mdbr/" class="external-link">mdbr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The package comes with a version of the <a href="https://github.com/tidyverse/nycflights13" class="external-link">nycflights13</a> relational database found with <code>mdb_examples()</code>.</p>
 <p>The tables in a database can be listed with <code><a href="reference/mdb_tables.html">mdb_tables()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_tables.html">mdb_tables</a></span><span class="op">(</span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mdb_example.html">mdb_example</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Airlines" "Airports" "Flights"  "Planes"</span></span></code></pre></div>
 <p>These tables can be exported as a delimited string or file.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airlines"</span>, path <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airlines"</span>, output <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">string</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; carrier|name</span></span>
 <span><span class="co">#&gt; '9E'|'Endeavor Air Inc.'</span></span>
@@ -120,8 +114,8 @@
 <span><span class="co">#&gt; 'VX'|'Virgin America'</span></span>
 <span><span class="co">#&gt; 'WN'|'Southwest Airlines Co.'</span></span>
 <span><span class="co">#&gt; 'YV'|'Mesa Airlines Inc.'</span></span></code></pre></div>
-<p>Tables can be easily converted to a temporary file and read immediately.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>Tables are read directly into R as a tibble with automatic type coercion.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/read_mdb.html">read_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 1,458 × 8</span></span>
 <span><span class="co">#&gt;    faa   name                             lat    lon   alt    tz dst   tzone              </span></span>
@@ -137,37 +131,35 @@
 <span><span class="co">#&gt;  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   </span></span>
 <span><span class="co">#&gt; 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles</span></span>
 <span><span class="co">#&gt; # ℹ 1,448 more rows</span></span></code></pre></div>
-<p>When reading a converted table, you might need to know what types of data to expect from each column.</p>
-<p>The schema of database tables describes the column types.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">mdb-schema</span> <span class="at">-T</span> Airports nycflights13.mdb</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; -- ----------------------------------------------------------</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co">#&gt; -- MDB Tools - A library for reading MS Access database files</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#&gt; -- Copyright (C) 2000-2011 Brian Bruns and others.</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">#&gt; -- Files in libmdb are licensed under LGPL and the utilities under</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="co">#&gt; -- the GPL, see COPYING.LIB and COPYING files respectively.</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="co">#&gt; -- Check out http://mdbtools.sourceforge.net</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="co">#&gt; -- ----------------------------------------------------------</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="co">#&gt; CREATE TABLE [Airports]</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; (</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="co">#&gt;     [faa]            Text (510), </span></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt;     [name]           Text (510), </span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt;     [lat]            Double, </span></span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt;     [lon]            Double, </span></span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt;     [alt]            Long Integer, </span></span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="co">#&gt;     [tz]             Integer, </span></span>
-<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co">#&gt;     [dst]            Text (510), </span></span>
-<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="co">#&gt;     [tzone]          Text (510)</span></span>
-<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="co">#&gt; );</span></span></code></pre></div>
-<p>This information can be interpreted as a <a href="https://readr.tidyverse.org/reference/spec.html" class="external-link">readr spec object</a>, which is used to accurately parse columns of a converted text file.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span>, condense <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<p>The DDL for a table can be retrieved with <code>mdb_schema(mode = "ddl")</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span>, mode <span class="op">=</span> <span class="st">"ddl"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [Airports]</span></span>
+<span><span class="co">#&gt; -- That file uses encoding UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; CREATE TABLE [Airports]</span></span>
+<span><span class="co">#&gt;  (</span></span>
+<span><span class="co">#&gt;  [faa]           Text (255),</span></span>
+<span><span class="co">#&gt;  [name]          Text (255),</span></span>
+<span><span class="co">#&gt;  [lat]           Double,</span></span>
+<span><span class="co">#&gt;  [lon]           Double,</span></span>
+<span><span class="co">#&gt;  [alt]           Long Integer,</span></span>
+<span><span class="co">#&gt;  [tz]            Integer,</span></span>
+<span><span class="co">#&gt;  [dst]           Text (255),</span></span>
+<span><span class="co">#&gt;  [tzone]         Text (255)</span></span>
+<span><span class="co">#&gt; );</span></span></code></pre></div>
+<p>Column types are returned as a <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">readr col spec</a> (requires the <strong>readr</strong> package). Use <code>condense = TRUE</code> to collapse columns sharing a type.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   .default = col_character(),</span></span>
+<span><span class="co">#&gt;   faa = col_character(),</span></span>
+<span><span class="co">#&gt;   name = col_character(),</span></span>
 <span><span class="co">#&gt;   lat = col_double(),</span></span>
 <span><span class="co">#&gt;   lon = col_double(),</span></span>
 <span><span class="co">#&gt;   alt = col_integer(),</span></span>
-<span><span class="co">#&gt;   tz = col_integer()</span></span>
+<span><span class="co">#&gt;   tz = col_integer(),</span></span>
+<span><span class="co">#&gt;   dst = col_character(),</span></span>
+<span><span class="co">#&gt;   tzone = col_character()</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre></div>
 <!-- refs: start -->
 <!-- refs: end -->
@@ -189,7 +181,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a> | <a href="https://www.r-project.org/Licenses/LGPL-2" class="external-link">LGPL-2</a></small></li>
 </ul>
 </div>
 
@@ -212,7 +204,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Kiernan Nicholls <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-9229-7897" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Kiernan Nicholls <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-9229-7897" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -223,7 +216,6 @@
 <li><a href="https://CRAN.R-project.org/package=mdbr" class="external-link"><img src="https://www.r-pkg.org/badges/version/mdbr" alt="CRAN status"></a></li>
 <li><a href="https://app.codecov.io/gh/k5cents/mdbr?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/k5cents/mdbr/master.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/k5cents/mdbr/actions" class="external-link"><img src="https://github.com/k5cents/mdbr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/k5cents/mdbr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
@@ -238,7 +230,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
