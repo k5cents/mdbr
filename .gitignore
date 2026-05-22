@@ -43,3 +43,4 @@ src/mdbtools/stamp-h1
 # Editor/OS noise
 .vscode/
 .DS_Store
+*.dSYM/

@@ -32,7 +32,7 @@ matching the k5cents/mdbr canonical API. Requires the \pkg{readr} package.
 \code{"ddl"} returns DDL text.}
 
 \item{condense}{Logical; only used when \code{mode = "legacy"}. When \code{TRUE},
-passes the col spec through \code{\link[readr:spec]{readr::cols_condense()}}. Default \code{FALSE}.}
+passes the col spec through \code{\link[readr:cols_condense]{readr::cols_condense()}}. Default \code{FALSE}.}
 
 \item{namespace}{Prefix identifiers with namespace, equivalent to
 \code{-N/--namespace}. Only used when \code{mode = "ddl"}.}
@@ -62,7 +62,7 @@ implemented.}
 }
 \value{
 When \code{mode = "legacy"}, a \code{\link[readr:cols]{readr::cols()}} specification (optionally
-condensed via \code{\link[readr:spec]{readr::cols_condense()}}). Requires the \pkg{readr} package.
+condensed via \code{\link[readr:cols_condense]{readr::cols_condense()}}). Requires the \pkg{readr} package.
 When \code{mode = "ddl"} and \code{as_list = TRUE}, a named \code{mdblist} of table-level
 DDL text.
 }

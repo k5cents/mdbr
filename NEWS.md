@@ -1,41 +1,33 @@
 # mdbr 0.3.0
 
-* **Bundled mdbtools**: The mdbtools C library is now compiled and shipped with
-  the package (`src/mdbtools/`). No external `mdbtools` installation is required.
-* **DBI interface**: A full read-only DBI backend is now available. Use
-  `DBI::dbConnect(mdb(), dbname = "path/to/file.mdb")` to open connections and
-  standard DBI verbs (`dbReadTable()`, `dbGetQuery()`, `dbListTables()`, etc.).
-* **New helper functions** from the bundled library:
-  - `mdb_sql()` — run SQL queries directly against an MDB/ACCDB file.
-  - `mdb_queries()` — list saved Access queries and retrieve their SQL.
-  - `mdb_count()` — count rows in a table, optionally with a `WHERE` clause.
-  - `mdb_schema()` — generate DDL (CREATE TABLE) schema in various SQL dialects with `mode = "ddl"`.
-  - `mdb_ver()` — return the file format or the mdbtools library version.
-  - `mdb_array()` — export a table as a named list of column vectors.
-  - `mdb_export()` — export a table to CSV or SQL INSERT statements.
-  - `mdb_json()` — export a table to JSON.
-  - `mdb_header()` — return a structural summary (version, tables, queries).
-  - `mdb_hexdump()` — hexadecimal dump of MDB file bytes.
-  - `mdb_import()` — stub (read-only; always errors with a clear message).
-  - `mdb_prop()` — retrieve MDB object properties.
-  - `print.mdblist` — pretty-printer for `mdblist` objects.
-* **No external dependencies**: `readr` has been removed. `read_mdb()` now reads
-  tables directly via the bundled C library with automatic type coercion
-  (integer, double, logical, POSIXct for DateTime, character otherwise).
-* **`mdb_schema()`** now covers both column-type inspection (default,
-  backward-compatible with mdbr <= 0.2.1) and DDL generation (`mode = "ddl"`)
-* **Backward-compatible**: `read_mdb()`, `export_mdb()`, `mdb_tables()`,
-  and `mdb_example()` function signatures are unchanged.
-* `mdb_tables()` gains additional optional arguments (`system`, `type`,
-  `show_type`, `as_text`, `single_column`, `delimiter`) matching the `mdb-tables`
-  CLI surface.
-* **`read_mdb()`** now returns a `tibble`. The `col_types` and `...` arguments
-  are deprecated with a lifecycle warning; they had no effect with the native
-  read path.
-* **CI**: macOS and Windows are now part of the check matrix; no external
-  mdbtools install step is needed.
-* Bruno Tremblay (Boostao) added as co-author for the DBI interface and
-  bundled mdbtools integration (originally developed in the `mdbtoolr` package).
+* The `mdbtools` C library is now compiled and bundled with the package.
+  No external `mdbtools` installation is required on any platform (#3).
+
+* A full read-only DBI backend is now available via `mdb()` (#6):
+
+  ```r
+  con <- DBI::dbConnect(mdb(), dbname = "path/to/file.mdb")
+  DBI::dbListTables(con)
+  DBI::dbGetQuery(con, "SELECT * FROM [Orders] LIMIT 10;")
+  DBI::dbDisconnect(con)
+  ```
+
+* New helper functions: `mdb_sql()`, `mdb_queries()`, `mdb_count()`,
+  `mdb_json()`, `mdb_export()`, `mdb_ver()`, `mdb_array()`, `mdb_header()`,
+  `mdb_hexdump()`, and `mdb_prop()`.
+
+* `mdb_schema()` gains a `mode` argument for DDL output in multiple SQL
+  dialects in addition to the existing readr col-spec mode.
+
+* `read_mdb()` now reads tables via the bundled C library and returns a tibble.
+  The `col_types` and `...` arguments are deprecated with a lifecycle warning.
+
+* `readr` is no longer a hard dependency. If you use `read_mdb()` and rely on
+  `readr` being available, add it explicitly to your own dependencies.
+
+* Thanks to [Bruno Tremblay](https://github.com/meztez) for contributing the
+  bundled mdbtools source, the DBI backend, and the expanded helper functions
+  (#9).
 
 # mdbr 0.2.1
 

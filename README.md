@@ -110,20 +110,21 @@ mdb_schema(ex, "Airports", mode = "ddl")
 #> 
 #> CREATE TABLE [Airports]
 #>  (
-#> 	[faa]			Text (255),
-#> 	[name]			Text (255),
-#> 	[lat]			Double,
-#> 	[lon]			Double,
-#> 	[alt]			Long Integer,
-#> 	[tz]			Integer,
-#> 	[dst]			Text (255),
-#> 	[tzone]			Text (255)
+#>  [faa]           Text (255),
+#>  [name]          Text (255),
+#>  [lat]           Double,
+#>  [lon]           Double,
+#>  [alt]           Long Integer,
+#>  [tz]            Integer,
+#>  [dst]           Text (255),
+#>  [tzone]         Text (255)
 #> );
 ```
 
-Column types are returned as a [readr col spec](https://readr.tidyverse.org/reference/cols.html)
-(requires the **readr** package). Use `condense = TRUE` to collapse columns
-sharing a type.
+Column types are returned as a [readr col
+spec](https://readr.tidyverse.org/reference/cols.html) (requires the
+**readr** package). Use `condense = TRUE` to collapse columns sharing a
+type.
 
 ``` r
 mdb_schema(ex, "Airports")

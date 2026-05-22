@@ -1,39 +1,55 @@
 ## Test environments
 
-* local: ubuntu 22.04.4, R 4.1.2
-* [ubuntu][gh_act] 18.04 (on github-actions), R 4.0.0
-* [rhub][rhub_win]: Fedora Linux, R-devel, clang, gfortran
-* [rhub][rhub_ubu]: Ubuntu Linux 16.04 LTS, R-release, GCC
-* [rhub][rhub_fed]: Fedora Linux, R-devel, clang, gfortran
-
-Tests and example do not run remotely, as the mdbtools software is needed.
+* local: macOS 26.3 (aarch64), R 4.3.3
+* GitHub Actions: ubuntu-latest, R release
+* GitHub Actions: ubuntu-latest, R devel
+* GitHub Actions: ubuntu-latest, R oldrel-1
+* GitHub Actions: windows-latest, R release
+* GitHub Actions: macos-latest, R release
+* win-builder: R devel (devtools::check_win_devel())
 
 ## R CMD check results
 
-0 errors | 0 warnings
+0 errors | 0 warnings | 1 note (local and GitHub Actions)
+0 errors | 1 warning | 2 notes (win-builder R-devel)
 
-# Submission
+### Note (all platforms)
 
-* Update invalid and redirected URLs.
-* Update email from kiernann@pronmail.com to k5cents@gmail.com
-* Update URLs from kiernann.com to k5cents.com
-* Update Github from @kiernann to @k5cents
+    checking for GNU extensions in Makefiles ... NOTE
+    GNU make is a SystemRequirements.
 
-## System Requirments
+The package vendors the mdbtools C library source and compiles it at install
+time using GNU make extensions in src/Makevars. GNU make is declared in
+SystemRequirements.
 
-The package relies on the open source mdbtools software. See the mdbtools 
-[documentation](http://mdbtools.sourceforge.net/install/) for full installation
-instructions. The tools are also found on package managers:
+### Note (win-builder only)
 
-* `apt install mdbtools`
-* `brew install mdbtools`
-* `rpm -i mdbtools-0.7-1.rpm `
+    checking CRAN incoming feasibility ... NOTE
+    Possibly misspelled words in DESCRIPTION: schemas
 
-Source code: https://github.com/mdbtools/mdbtools/archive/0.7.1.tar.gz
+"schemas" is used intentionally and is not misspelled.
 
-<!-- links: start -->
-[gh_act]: https://github.com/k5cents/mdbr/actions
-[rhub_win]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-b4490e7b655f472fa88ed1abe473320b
-[rhub_ubu]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-66a7afa7897f43538970e18ca03ac013
-[rhub_fed]: https://builder.r-hub.io/status/mdbr_0.1.1.tar.gz-b4490e7b655f472fa88ed1abe473320b
-<!-- links: end -->
+### Warning (win-builder only)
+
+The bundled mdbtools C source produces pedantic compiler warnings on Windows
+(ISO C ternary omission in catalog.c, void pointer arithmetic in file.c and
+table.c, signed char overflow in index.c). These are pre-existing issues in
+the upstream mdbtools library (https://github.com/mdbtools/mdbtools), are not
+present in the R package code itself, and do not affect installation or
+functionality.
+
+## Submission notes
+
+This is a major feature release (0.2.1 -> 0.3.0):
+
+* The mdbtools C library (v1.0.1) is now vendored in src/mdbtools/ and
+  compiled at install time. No external mdbtools installation is required.
+* A full read-only DBI backend is added via mdb().
+* New helper functions: mdb_sql(), mdb_queries(), mdb_count(), mdb_json(),
+  mdb_export(), mdb_ver(), mdb_array(), mdb_header(), mdb_hexdump(), mdb_prop().
+* readr is no longer a hard dependency; col_types and ... arguments to
+  read_mdb() are deprecated with lifecycle warnings.
+* Bruno Tremblay added as contributor (DBI interface and bundled mdbtools).
+
+The vendored mdbtools sources are licensed GPL-2+ (COPYING) and LGPL-2+
+(COPYING.LIB), both compatible with the package's GPL-3 license.

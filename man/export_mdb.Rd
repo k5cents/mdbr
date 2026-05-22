@@ -42,7 +42,7 @@ the file. If \code{TRUE}, column names will be included.}
 Unix style newlines, or \code{"\\r\\n"} for Windows style newlines.}
 
 \item{date_format}{The format in which date columns are converted. MDB Tools
-uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_datetime]{readr::parse_date()}}. No need to
+uses the \code{strftime(3)} format, similar to \code{\link[readr:parse_date]{readr::parse_date()}}. No need to
 specify whole string. Defaults to ISO8601.}
 }
 \value{

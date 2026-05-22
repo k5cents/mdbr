@@ -11,10 +11,7 @@
 #' DBI::dbDisconnect(conn)
 #' @useDynLib mdbr
 #' @importFrom methods new setClass setMethod
-#' @importFrom DBI dbConnect dbDisconnect dbIsValid dbListTables dbListObjects
-#'   dbExistsTable dbListFields dbReadTable dbQuoteIdentifier dbSendQuery
-#'   dbGetQuery dbExecute dbFetch dbHasCompleted dbClearResult SQL
-#'   dbCanConnect
+#' @importFrom DBI dbConnect dbDisconnect dbIsValid dbListTables dbListObjects dbExistsTable dbListFields dbReadTable dbQuoteIdentifier dbSendQuery dbGetQuery dbExecute dbFetch dbHasCompleted dbClearResult SQL dbCanConnect
 #' @export
 mdb <- function() {
   methods::new("MdbDriver")

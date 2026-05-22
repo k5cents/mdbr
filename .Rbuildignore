@@ -21,3 +21,4 @@
 ^src/mdbtools/libtool$
 ^src/mdbtools/stamp-h1$
 ^src/.*\.(o|obj|so|dll|dylib|a|lib|def|exp)$
+^.*\.dSYM$
