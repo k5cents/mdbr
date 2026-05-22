@@ -5,6 +5,9 @@
 #' inst/extdata directory. This function make it easy to access.
 #'
 #' @param path path to the Microsoft Access file.
+#' @return A character string with the full path to the bundled example file.
+#' @examples
+#' mdb_example()
 #' @export
 mdb_example <- function(path = "nycflights13.mdb") {
   if (!is.character(path)) {

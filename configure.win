@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+echo "[mdbr] configure.win: no-op (using vendored libmdb sources via src/Makevars.win)"
+exit 0

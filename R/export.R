@@ -6,10 +6,10 @@
 #'
 #' @param file Path to the Microsoft Access file.
 #' @param table Name of the table, list with `mdb_tables()`.
-#' @param output Path or connection to write to. Passed to the `stdout` argument
-#'   of [system2()]. Possible values are "", to the R console (the default),
-#'   `NULL` or `FALSE` (discard output), `TRUE` (capture the output in a
-#'   character vector) or a character string naming a file.
+#' @param output Controls where output is sent. `TRUE` (the default) returns
+#'   the output as a character vector. `""` prints to the R console and returns
+#'   invisibly. `NULL` or `FALSE` discards the output. A character string is
+#'   treated as a file path to write to, returning the path invisibly.
 #' @param delim Delimiter used to separate values.
 #' @param quote Single character used to quote strings. Defaults to `"`.
 #' @param quote_escape The type of escaping to use for quoted values, one of
@@ -29,12 +29,22 @@
 #' export_mdb(mdb_example(), "Airlines", output = TRUE)
 #' }
 #' @export
-export_mdb <- function(file, table, output = TRUE, delim = ",",
-                       quote = "\"", quote_escape = "double", col_names = TRUE,
-                       eol = "\n", date_format = "%Y-%m-%d %H:%M:%S") {
-  check_mdb_tools()
+export_mdb <- function(
+  file,
+  table,
+  output = TRUE,
+  delim = ",",
+  quote = "\"",
+  quote_escape = "double",
+  col_names = TRUE,
+  eol = "\n",
+  date_format = "%Y-%m-%d %H:%M:%S"
+) {
   if (missing(table)) {
     stop("Must define a table name, list with mdb_tables()", call. = FALSE)
+  }
+  if (identical(output, FALSE) || is.null(output)) {
+    return(invisible(NULL))
   }
   quote_escape <- switch(
     standardize_escape(quote_escape),
@@ -42,25 +52,29 @@ export_mdb <- function(file, table, output = TRUE, delim = ",",
     backslash = "\\",
     none = ""
   )
-  out <- system2(
-    command = Sys.which("mdb-export"),
-    stdout = output,
-    args = c(
-      ifelse(!col_names, shQuote("-H"), ""),
-      paste("-d", shQuote(delim)),
-      paste("-R", shQuote(eol)),
-      paste("-D", shQuote(date_format)),
-      paste("-q", shQuote(quote)),
-      paste("-X", shQuote(quote_escape)),
-      shQuote(file),
-      shQuote(table)
-    )
+  escape_arg <- if (nzchar(quote_escape)) quote_escape else NULL
+
+  out <- mdb_export(
+    path = file,
+    table = table,
+    no_header = !col_names,
+    delimiter = delim,
+    row_delimiter = eol,
+    quote = quote,
+    escape = escape_arg,
+    datetime_format = date_format
   )
+
   if (isTRUE(output)) {
-    Encoding(out) <- "UTF-8"
-    paste0(out, collapse = eol)
-  } else if (file.exists(output)) {
-    invisible(output)
+    return(out)
+  } else if (identical(output, "")) {
+    cat(out)
+    return(invisible(out))
+  } else {
+    con <- file(output, open = "wb")
+    on.exit(close(con), add = TRUE)
+    writeLines(out, con = con, useBytes = TRUE)
+    return(invisible(output))
   }
 }
 

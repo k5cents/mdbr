@@ -1,0 +1,48 @@
+diff --git a/include/mdbtools.h b/include/mdbtools.h
+index 4c8ac64..4dbf6b1 100644
+--- a/include/mdbtools.h
++++ b/include/mdbtools.h
+@@ -510,6 +510,7 @@ typedef struct {
+ 	unsigned char is_null;
+ 	unsigned char is_fixed;
+ 	int colnum;
++	int col_num;
+ 	int offset;
+ } MdbField;
+ 
+diff --git a/include/mdbtools.h.in b/include/mdbtools.h.in
+index 542cd87..7d4c719 100644
+--- a/include/mdbtools.h.in
++++ b/include/mdbtools.h.in
+@@ -474,6 +474,7 @@ typedef struct {
+ 	unsigned char is_null;
+ 	unsigned char is_fixed;
+ 	int colnum;
++	int col_num;
+ 	int offset;
+ } MdbField;
+ 
+diff --git a/src/libmdb/sargs.c b/src/libmdb/sargs.c
+index ca4f458..2da05f5 100644
+--- a/src/libmdb/sargs.c
++++ b/src/libmdb/sargs.c
+@@ -276,7 +276,7 @@
+ 	int i;
+ 
+ 	for (i=0;i<num_fields;i++) {
+-		if (fields[i].colnum == col_num) return i;
++		if (fields[i].col_num == col_num) return i;
+ 	}
+ 	return -1;
+ }
+diff --git a/src/libmdb/write.c b/src/libmdb/write.c
+index d08db2f..75a4d17 100644
+--- a/src/libmdb/write.c
++++ b/src/libmdb/write.c
+@@ -264,5 +264,6 @@
+ 		col = g_ptr_array_index(table->columns,i);
+ 		fields[i].colnum = i;
++		fields[i].col_num = col->col_num;
+ 		fields[i].is_fixed = col->is_fixed;
+ 		byte_num = col->col_num / 8;
+ 		bit_num = col->col_num % 8;

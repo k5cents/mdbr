@@ -29,9 +29,9 @@ if (!interactive()) {
 <!-- badges: end -->
 
 The goal of mdbr is to easily access the open source [MDB Tools][mdbt] written
-by Brian Bruns. The MDB Tools command line utilities take proprietary Microsoft
-Access files and convert them to standard text files. This package is
-experimental and has only been tested on simple MDB databases.
+by Brian Bruns. The MDB Tools C library is now bundled with the package — no
+external installation is required. This package reads proprietary Microsoft
+Access files directly and returns standard R data frames.
 
 ## Installation
 
@@ -48,27 +48,10 @@ The development version can be installed from [GitHub][gh].
 remotes::install_github("k5cents/mdbr")
 ```
 
-> [!IMPORTANT]  
-> The user must install [MDB Tools][mdbt] separately. For example, users on 
-> Debian systems can install the tools from the apt repository.
-
-```bash
-sudo apt install mdbtools
-```
-
-On MacOS, the tools can be installed using homebrew.
-
-```bash
-brew install mdbtools
-```
-
-More installation methods can be found on the package's [README][readme].
-
 ## Example
 
 ```{r libs}
 library(mdbr)
-library(readr)
 ```
 
 The package comes with a version of the [nycflights13][nycf] relational database
@@ -83,49 +66,28 @@ mdb_tables(ex <- mdb_example())
 These tables can be exported as a delimited string or file.
 
 ```{r export}
-string <- export_mdb(ex, "Airlines", path = TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
 cat(string, sep = "\n")
 ```
 
-Tables can be easily converted to a temporary file and read immediately.
+Tables are read directly into R as a tibble with automatic type coercion.
 
 ```{r read, message=FALSE}
 read_mdb(ex, "Airports")
 ```
 
-When reading a converted table, you might need to know what types of data to
-expect from each column. 
+The DDL for a table can be retrieved with `mdb_schema(mode = "ddl")`.
 
-The schema of database tables describes the column types.
-
-``` bash
-mdb-schema -T Airports nycflights13.mdb
-#> -- ----------------------------------------------------------
-#> -- MDB Tools - A library for reading MS Access database files
-#> -- Copyright (C) 2000-2011 Brian Bruns and others.
-#> -- Files in libmdb are licensed under LGPL and the utilities under
-#> -- the GPL, see COPYING.LIB and COPYING files respectively.
-#> -- Check out http://mdbtools.sourceforge.net
-#> -- ----------------------------------------------------------
-#> 
-#> CREATE TABLE [Airports]
-#> (
-#>     [faa]            Text (510), 
-#>     [name]           Text (510), 
-#>     [lat]            Double, 
-#>     [lon]            Double, 
-#>     [alt]            Long Integer, 
-#>     [tz]             Integer, 
-#>     [dst]            Text (510), 
-#>     [tzone]          Text (510)
-#> );
+```{r ddl}
+mdb_schema(ex, "Airports", mode = "ddl")
 ```
 
-This information can be interpreted as a [readr spec object][spec], which is
-used to accurately parse columns of a converted text file.
+Column types are returned as a [readr col spec](https://readr.tidyverse.org/reference/cols.html)
+(requires the **readr** package). Use `condense = TRUE` to collapse columns
+sharing a type.
 
 ```{r schema}
-mdb_schema(ex, "Airports", condense = TRUE)
+mdb_schema(ex, "Airports")
 ```
 
 
@@ -142,7 +104,5 @@ mdb_schema(ex, "Airports", condense = TRUE)
 [mdbt]: https://github.com/mdbtools/mdbtools
 [gh]:  https://github.com/k5cents/mdbr/
 [cran]:  https://cran.r-project.org/package=mdbr
-[readme]: https://github.com/mdbtools/mdbtools/blob/dev/README.md
 [nycf]: https://github.com/tidyverse/nycflights13
-[spec]: https://readr.tidyverse.org/reference/spec.html
 <!-- refs: end -->

@@ -1,0 +1,12 @@
+diff --git a/src/libmdb/backend.c b/src/libmdb/backend.c
+--- a/src/libmdb/backend.c
++++ b/src/libmdb/backend.c
+@@ -197,7 +197,7 @@
+ 	*pr++ = quote_char;
+ 	while ((c=*(unsigned char*)value++)) {
+ 		if (c<32) {
+-			sprintf(pr, "\\%03o", c);
++			snprintf(pr, 5, "\\%03o", c);
+ 			pr+=4;
+ 			continue;
+ 		}

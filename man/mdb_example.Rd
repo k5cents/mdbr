@@ -9,8 +9,14 @@ mdb_example(path = "nycflights13.mdb")
 \arguments{
 \item{path}{path to the Microsoft Access file.}
 }
+\value{
+A character string with the full path to the bundled example file.
+}
 \description{
 mdbr comes bundled with a sample file from the
 \href{https://github.com/tidyverse/nycflights13}{nycflights13} package in its
 inst/extdata directory. This function make it easy to access.
+}
+\examples{
+mdb_example()
 }

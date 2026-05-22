@@ -1,0 +1,55 @@
+#!/bin/sh
+set -eu
+
+CC=`"${R_HOME}/bin/R" CMD config CC`
+CFLAGS=`"${R_HOME}/bin/R" CMD config CFLAGS`
+CPPFLAGS=`"${R_HOME}/bin/R" CMD config CPPFLAGS`
+
+# Compile a test file and set HAVE_<UPPER>_DEF to -DHAVE_<UPPER> or empty.
+# The test file must already be written to _conftest.c before calling this.
+check_func() {
+    _func=$1
+    _upper=$(echo "$_func" | tr '[:lower:]' '[:upper:]')
+    printf "[mdbr] configure: checking for %s... " "$_func"
+    if ${CC} ${CPPFLAGS} ${CFLAGS} -Werror=implicit-function-declaration -o _conftest _conftest.c 2>/dev/null; then
+        echo "yes"
+        eval "HAVE_${_upper}_DEF=-DHAVE_${_upper}"
+    else
+        echo "no"
+        eval "HAVE_${_upper}_DEF=''"
+    fi
+    rm -f _conftest.c _conftest
+}
+
+cat > _conftest.c << 'EOF'
+#include <time.h>
+int main(void) { struct tm t; time_t x = 0; gmtime_r(&x, &t); return 0; }
+EOF
+check_func gmtime_r
+
+cat > _conftest.c << 'EOF'
+#include <time.h>
+int main(void) { struct tm t; strptime("2024", "%Y", &t); return 0; }
+EOF
+check_func strptime
+
+cat > _conftest.c << 'EOF'
+#include <stdio.h>
+int main(void) { char b[4]; fmemopen(b, sizeof(b), "r"); return 0; }
+EOF
+check_func fmemopen
+
+cat > _conftest.c << 'EOF'
+#include <stdlib.h>
+int main(void) { void *p = reallocf(NULL, 1); (void)p; return 0; }
+EOF
+check_func reallocf
+
+sed -e "s|@HAVE_GMTIME_R_DEF@|${HAVE_GMTIME_R_DEF}|" \
+    -e "s|@HAVE_STRPTIME_DEF@|${HAVE_STRPTIME_DEF}|" \
+    -e "s|@HAVE_FMEMOPEN_DEF@|${HAVE_FMEMOPEN_DEF}|" \
+    -e "s|@HAVE_REALLOCF_DEF@|${HAVE_REALLOCF_DEF}|" \
+    src/Makevars.in > src/Makevars
+
+echo "[mdbr] configure: done"
+exit 0

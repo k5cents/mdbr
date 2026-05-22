@@ -9,22 +9,24 @@ read_mdb(file, table, col_names = TRUE, col_types = NULL, ...)
 \arguments{
 \item{file}{Path to the Microsoft Access file.}
 
-\item{table}{Name of the table, list with \code{mdb_tables()}.}
+\item{table}{Name of the table, list with \code{\link[=mdb_tables]{mdb_tables()}}.}
 
-\item{col_names}{Whether or not to suppress column names from the table.}
+\item{col_names}{Logical; when \code{FALSE} columns are named \code{V1}, \code{V2}, etc.}
 
-\item{col_types}{One of \code{NULL}, a \code{\link[readr:cols]{readr::cols()}} specification, or a string.
-See \code{vignette("readr")} for more details. Use \code{TRUE} to create a generic
-\code{\link[readr:cols]{readr::cols()}} specification with \code{\link[=mdb_schema]{mdb_schema()}}.}
+\item{col_types}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Type coercion
+is now handled automatically by the native reader.}
 
-\item{...}{Additional arguments passed to \code{\link[readr:read_delim]{readr::read_delim()}}.}
+\item{...}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Ignored. Extra arguments were
+previously forwarded to \code{\link[readr:read_delim]{readr::read_delim()}}, which is no longer used.}
 }
 \value{
-A data frame.
+A \link[tibble:tibble]{tibble}.
 }
 \description{
-Use \code{\link[=export_mdb]{export_mdb()}} to write a table as a temporary CSV file, which is then
-read as a data frame using \code{\link[readr:read_delim]{readr::read_delim()}}.
+Reads a table directly from a Microsoft Access database using the bundled
+mdbtools C library. Column types are inferred from the MDB schema:
+integer, double, logical, \link[base:DateTimeClasses]{POSIXct} for DateTime
+columns, and character otherwise.
 }
 \examples{
 \dontrun{

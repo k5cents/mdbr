@@ -1,21 +1,34 @@
 Package: mdbr
 Title: Work with Microsoft Access Files
-Version: 0.2.1
-Authors@R: 
+Version: 0.3.0
+Authors@R: c(
     person("Kiernan", "Nicholls", email = "k5cents@gmail.com", role = c("aut", "cre", "cph"),
-           comment = c(ORCID = "0000-0002-9229-7897"))
-Description: Use the open source 'MDB Tools' utilities
-    <https://github.com/mdbtools/mdbtools/>. Primarily used for converting
-    proprietary Microsoft Access files to simple text files and then
-    reading those as data frames.
-License: GPL-3
-URL: https://k5cents.github.io/mdbr/, https://github.com/k5cents/mdbr
+           comment = c(ORCID = "0000-0002-9229-7897")),
+    person("Bruno", "Tremblay", email = "cran@neoxone.com", role = c("ctb"),
+           comment = "DBI interface and bundled mdbtools source"))
+Description: Work with Microsoft Access '.mdb' and '.accdb' files using the
+    open source 'MDB Tools' library <https://github.com/mdbtools/mdbtools/>.
+    The library is compiled and bundled with the package, so no external
+    installation is required. Provides high-level helpers for reading tables,
+    exporting to CSV or JSON, inspecting schemas, and running SQL queries.
+    Also exposes a full read-only 'DBI' interface for use with standard
+    database workflows.
+License: GPL-3 | LGPL-2
+URL: https://k5cents.github.io/mdbr/, https://github.com/k5cents/mdbr, https://github.com/mdbtools/mdbtools/
 BugReports: https://github.com/k5cents/mdbr/issues
-Imports: 
-    readr
-Suggests: 
-    testthat
+Imports:
+    DBI,
+    lifecycle,
+    methods,
+    tibble,
+    utils,
+    jsonlite
+Suggests:
+    readr,
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
-SystemRequirements: mdbtools: mdbtools (deb).
+RoxygenNote: 7.3.3
+NeedsCompilation: yes
+SystemRequirements: GNU make
+Config/testthat/edition: 3

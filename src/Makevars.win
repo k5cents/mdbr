@@ -1,0 +1,9 @@
+PKG_CPPFLAGS = -Imdbtools/include -DTLS=__thread -include mdb_r_stdio.h
+C_STD = C99
+
+MDBTOOLS_LIBMDB_SRC := $(wildcard mdbtools/src/libmdb/*.c)
+MDBTOOLS_LIBMDB_OBJ := $(MDBTOOLS_LIBMDB_SRC:.c=.o)
+MDBTOOLS_SQL_SRC := $(wildcard mdbtools/src/sql/*.c)
+MDBTOOLS_SQL_OBJ := $(MDBTOOLS_SQL_SRC:.c=.o)
+
+OBJECTS = init.o mdb_native.o mdb_r_stdio.o $(MDBTOOLS_LIBMDB_OBJ) $(MDBTOOLS_SQL_OBJ)

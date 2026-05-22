@@ -1,0 +1,11 @@
+diff --git a/src/libmdb/data.c b/src/libmdb/data.c
+--- a/src/libmdb/data.c
++++ b/src/libmdb/data.c
+@@ -30,7 +30,7 @@ static size_t mdb_copy_ole(MdbHandle *mdb, void *dest, int start, int size);
+ #endif
+ 
+-#ifndef HAVE_REALLOCF
++#if !defined(HAVE_REALLOCF) && !defined(__APPLE__)
+ static void *reallocf(void *ptr, size_t len) {
+ 	void *ptr2 = realloc(ptr, len);
+ 	if (!ptr2) {

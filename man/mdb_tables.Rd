@@ -4,14 +4,36 @@
 \alias{mdb_tables}
 \title{List tables in a Microsoft Access database}
 \usage{
-mdb_tables(file)
+mdb_tables(
+  file,
+  system = FALSE,
+  type = c("table", "query", "systable", "any", "all", "form", "macro", "report",
+    "linkedtable", "module", "relationship", "dbprop"),
+  show_type = FALSE
+)
 }
 \arguments{
 \item{file}{Path to the Microsoft Access file.}
+
+\item{system}{Logical; include system (\verb{MSys*}) tables. Equivalent to \code{-S}.}
+
+\item{type}{Object type to list: \code{"table"} (default), \code{"query"},
+\code{"systable"}, \code{"any"}, \code{"all"}, \code{"form"}, \code{"macro"}, \code{"report"},
+\code{"linkedtable"}, \code{"module"}, \code{"relationship"}, or \code{"dbprop"}.
+Equivalent to \code{-t}.}
+
+\item{show_type}{Logical; prefix each entry with its type. Equivalent to \code{-T}.}
 }
 \value{
-A character vector of table names.
+A character vector of object names.
 }
 \description{
-List tables in a Microsoft Access database
+\code{mdb-tables} is a utility program distributed with MDB Tools.
+It outputs the names of all user tables (or other object types) in an MDB
+database file.
+}
+\examples{
+db <- mdb_example()
+mdb_tables(db)
+mdb_tables(db, type = "query")
 }
