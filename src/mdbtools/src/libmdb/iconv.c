@@ -92,7 +92,9 @@ static size_t unicode2ascii_locale(mdb_locale_t locale, const char *in_ptr, size
     size_t i;
     size_t count = 0;
     size_t len_out = dlen - 1;
-    wchar_t *w = malloc((len_in/2+1)*sizeof(wchar_t));
+    size_t wlen = len_in/2+1;
+    if (wlen == 0 || wlen > SIZE_MAX/sizeof(wchar_t)) return 0;
+    wchar_t *w = calloc(wlen, sizeof(wchar_t));
 
     for(i=0; i<len_in/2; i++)
     {
@@ -177,6 +179,7 @@ mdb_ascii2unicode(MdbHandle *mdb, const char *src, size_t slen, char *dest, size
         size_t len_in, len_out;
         const char *in_ptr = NULL;
         char *out_ptr = NULL;
+        size_t orig_dlen = dlen;
 
 	if ((!src) || (!dest) || (!dlen))
 		return 0;
@@ -238,7 +241,7 @@ mdb_ascii2unicode(MdbHandle *mdb, const char *src, size_t slen, char *dest, size
 				tptr = dlen;
 			}
 		}
-		if (tptr < dlen) {
+		if (tptr < dlen && tptr <= orig_dlen) {
 			memcpy(dest, tmp, tptr);
 			dlen = tptr;
 		}
