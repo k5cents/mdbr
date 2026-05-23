@@ -10,8 +10,7 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note (local and GitHub Actions)
-0 errors | 1 warning | 2 notes (win-builder R-devel)
+0 errors | 0 warnings | 1 note (all platforms)
 
 ### Note (all platforms)
 
@@ -21,22 +20,6 @@
 The package vendors the mdbtools C library source and compiles it at install
 time using GNU make extensions in src/Makevars. GNU make is declared in
 SystemRequirements.
-
-### Note (win-builder only)
-
-    checking CRAN incoming feasibility ... NOTE
-    Possibly misspelled words in DESCRIPTION: schemas
-
-"schemas" is used intentionally and is not misspelled.
-
-### Warning (win-builder only)
-
-The bundled mdbtools C source produces pedantic compiler warnings on Windows
-(ISO C ternary omission in catalog.c, void pointer arithmetic in file.c and
-table.c, signed char overflow in index.c). These are pre-existing issues in
-the upstream mdbtools library (https://github.com/mdbtools/mdbtools), are not
-present in the R package code itself, and do not affect installation or
-functionality.
 
 ## Submission notes
 
