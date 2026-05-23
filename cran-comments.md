@@ -23,17 +23,16 @@ SystemRequirements.
 
 ## Submission notes
 
-This is a patch release fixing two build issues discovered after 0.3.0 was
-accepted to CRAN:
+This is a patch release fixing a heap-use-after-free detected by AddressSanitizer
+on CRAN's M1-SAN and Linux sanitizer checks (reported by CRAN during 0.3.1 review):
 
-* Four C compiler warnings in vendored mdbtools source (ISO C ternary omission,
-  void pointer arithmetic, signed char overflow) caused CRAN pre-test rejection
-  on Windows and Debian. These have been fixed by patching the four affected
-  files in src/mdbtools/src/libmdb/.
+* In `src/mdb_native.c`, the SQL query error path stored a raw pointer into
+  the `MdbSQL` struct's `error_msg` field (`mdb_sql_last_error()` is a macro
+  that returns `(sql)->error_msg`), then freed the struct via `mdb_sql_exit()`,
+  then passed the dangling pointer to `Rf_error()`. The error string is now
+  copied into a local `char[1024]` buffer before `mdb_sql_exit()` is called,
+  matching the safe pattern already used in the adjacent `mdb_sql_open` error
+  path in the same function (#15).
 
-* A compilation failure on CRAN's macOS ARM64 platforms (`r-release-macos-arm64`
-  and `r-oldrel-macos-arm64`) caused by `locale_t` being undefined. Fixed by
-  including `<xlocale.h>` on Apple platforms via a compile-time `__APPLE__`
-  guard in src/mdbtools/include/mdbtools.h.
-
-All fixes are in the vendored mdbtools C source and do not affect the R API.
+All prior fixes from 0.3.1 (locale_t on macOS ARM64, four C compiler warnings)
+are retained.

@@ -1,3 +1,11 @@
+# mdbr 0.3.2
+
+* Fixed heap-use-after-free in `mdbr_run_query` (detected by AddressSanitizer
+  on CRAN's M1-SAN and Linux sanitizer checks). When a SQL query failed,
+  the error message was read from a pointer into the `MdbSQL` struct after the
+  struct had been freed via `mdb_sql_exit()`. The error string is now copied
+  into a local buffer before cleanup (#15).
+
 # mdbr 0.3.1
 
 * Fixed compilation failure on macOS ARM64 (CRAN `r-release-macos-arm64` and

@@ -1191,12 +1191,15 @@ SEXP mdbr_run_query(SEXP path_sexp, SEXP statement_sexp) {
 
   if (mdb_sql_run_query(sql, query) == NULL || mdb_sql_has_error(sql)) {
     const char *err = mdb_sql_last_error(sql);
+    char err_buf[1024];
     if (err == NULL || err[0] == '\0') {
-      err = "Failed to execute SQL query.";
+      snprintf(err_buf, sizeof(err_buf), "%s", "Failed to execute SQL query.");
+    } else {
+      snprintf(err_buf, sizeof(err_buf), "%s", err);
     }
     free(query);
     mdb_sql_exit(sql);
-    Rf_error("%s", err);
+    Rf_error("%s", err_buf);
   }
 
   free(query);
