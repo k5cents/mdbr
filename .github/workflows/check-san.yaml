@@ -2,9 +2,13 @@
 # Uses the same r-hub containers CRAN's clang-ASAN check uses.
 # Runs weekly and on manual dispatch; not on every push (slow, ~10 min).
 on:
+  push:
+    branches: [master]
+    paths: ['src/**']
+  pull_request:
+    branches: [master]
+    paths: ['src/**']
   workflow_dispatch:
-  schedule:
-    - cron: '0 6 * * 1'  # weekly Monday 6am UTC
 
 name: ASAN
 
