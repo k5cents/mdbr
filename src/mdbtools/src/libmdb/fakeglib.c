@@ -18,13 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-/* vasprintf() requires _GNU_SOURCE on Linux/glibc; on macOS it is always
-   available. Must be defined before any system header (including transitive
-   ones pulled in by mdbfakeglib.h) so glibc's <features.h> sees it. */
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
 #include "mdbfakeglib.h"
 
 #include <stddef.h>
