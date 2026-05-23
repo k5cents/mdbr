@@ -24,7 +24,7 @@ jobs:
         run: |
           pak::pak(c(
             "DBI", "lifecycle", "tibble", "jsonlite",
-            "rcmdcheck", "testthat"
+            "rcmdcheck", "testthat", "readr"
           ))
         shell: Rscript {0}
 
