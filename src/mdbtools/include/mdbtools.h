@@ -19,7 +19,11 @@
 #define _mdbtools_h_
 
 #define MDBTOOLS_H_HAVE_ICONV_H 1
+#if defined(__APPLE__)
+#define MDBTOOLS_H_HAVE_XLOCALE_H 1
+#else
 #define MDBTOOLS_H_HAVE_XLOCALE_H 0
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
