@@ -1,3 +1,11 @@
+# mdbr 0.3.3
+
+* Fixed compilation failure on Linux with clang-22 / clang-ASAN (CRAN's
+  `clang-ASAN` check platform). `vasprintf()` requires `_GNU_SOURCE` to be
+  visible from glibc's `<stdio.h>`; added `#define _GNU_SOURCE` guard at the
+  top of `src/mdbtools/src/libmdb/fakeglib.c` before system headers are
+  included. Not needed on macOS where `vasprintf()` is always available.
+
 # mdbr 0.3.2
 
 * Fixed heap-use-after-free in `mdbr_run_query` (detected by AddressSanitizer

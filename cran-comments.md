@@ -23,16 +23,17 @@ SystemRequirements.
 
 ## Submission notes
 
-This is a patch release fixing a heap-use-after-free detected by AddressSanitizer
-on CRAN's M1-SAN and Linux sanitizer checks (reported by CRAN during 0.3.1 review):
+This is a patch release fixing two issues detected by CRAN's sanitizer checks:
 
-* In `src/mdb_native.c`, the SQL query error path stored a raw pointer into
-  the `MdbSQL` struct's `error_msg` field (`mdb_sql_last_error()` is a macro
-  that returns `(sql)->error_msg`), then freed the struct via `mdb_sql_exit()`,
+* Heap-use-after-free in `src/mdb_native.c`: the SQL query error path stored a
+  raw pointer into `MdbSQL->error_msg` via `mdb_sql_last_error()` (a macro
+  returning `(sql)->error_msg`), then freed the struct via `mdb_sql_exit()`,
   then passed the dangling pointer to `Rf_error()`. The error string is now
-  copied into a local `char[1024]` buffer before `mdb_sql_exit()` is called,
-  matching the safe pattern already used in the adjacent `mdb_sql_open` error
-  path in the same function (#15).
+  copied into a local `char[1024]` buffer before cleanup (#15).
 
-All prior fixes from 0.3.1 (locale_t on macOS ARM64, four C compiler warnings)
-are retained.
+* Compilation failure on Linux with clang-22 (`clang-ASAN` platform):
+  `vasprintf()` requires `_GNU_SOURCE` to be visible from glibc's `<stdio.h>`.
+  Added `#define _GNU_SOURCE` guard at the top of
+  `src/mdbtools/src/libmdb/fakeglib.c` before any system headers (#16).
+
+All prior fixes from 0.3.1 are retained.

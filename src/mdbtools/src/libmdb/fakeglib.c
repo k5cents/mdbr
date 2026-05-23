@@ -20,6 +20,12 @@
 
 #include "mdbfakeglib.h"
 
+/* vasprintf() requires _GNU_SOURCE on Linux/glibc; on macOS it is always
+   available. Define it before any system header so glibc exposes it. */
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdarg.h>
