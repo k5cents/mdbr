@@ -1,0 +1,41 @@
+# Run AddressSanitizer checks matching CRAN's sanitizer platforms.
+# Uses the same r-hub containers CRAN's clang-ASAN check uses.
+# Runs weekly and on manual dispatch; not on every push (slow, ~10 min).
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'  # weekly Monday 6am UTC
+
+name: ASAN
+
+jobs:
+  clang-asan:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/r-hub/containers/clang-asan:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          pak::pak(c(
+            "DBI", "lifecycle", "tibble", "jsonlite",
+            "rcmdcheck", "testthat"
+          ))
+        shell: Rscript {0}
+
+      - name: Check (ASAN)
+        run: |
+          rcmdcheck::rcmdcheck(
+            args    = "--no-manual",
+            error_on = "warning",
+            check_dir = "check"
+          )
+        shell: Rscript {0}
+
+      - name: Upload check artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-asan-check
+          path: check
