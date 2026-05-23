@@ -1,3 +1,16 @@
+# mdbr 0.3.1
+
+* Fixed compilation failure on macOS ARM64 (CRAN `r-release-macos-arm64` and
+  `r-oldrel-macos-arm64`). The vendored mdbtools source now correctly includes
+  `<xlocale.h>` on Apple platforms, where `locale_t` is not exposed through
+  `<locale.h>` alone under strict SDK settings (#14).
+
+* Fixed four C compiler warnings in vendored mdbtools source that caused CRAN
+  pre-test rejection (#12):
+  - `catalog.c`: expanded GCC-only `?:` to standard ternary
+  - `file.c`, `table.c`: cast `void*` to `char*` before pointer arithmetic
+  - `index.c`: declared `idx_to_text` as `unsigned char[]` to hold `0x81`
+
 # mdbr 0.3.0
 
 * The `mdbtools` C library is now compiled and bundled with the package.
