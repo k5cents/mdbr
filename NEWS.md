@@ -1,31 +1,8 @@
 # mdbr 0.3.3
 
-* Fixed compilation failure on Linux with clang-22 / clang-ASAN (CRAN's
-  `clang-ASAN` check platform). `vasprintf()` requires `_GNU_SOURCE` to be
-  visible from glibc's `<stdio.h>`; added `#define _GNU_SOURCE` guard at the
-  top of `src/mdbtools/src/libmdb/fakeglib.c` before system headers are
-  included. Not needed on macOS where `vasprintf()` is always available.
-
 # mdbr 0.3.2
 
-* Fixed heap-use-after-free in `mdbr_run_query` (detected by AddressSanitizer
-  on CRAN's M1-SAN and Linux sanitizer checks). When a SQL query failed,
-  the error message was read from a pointer into the `MdbSQL` struct after the
-  struct had been freed via `mdb_sql_exit()`. The error string is now copied
-  into a local buffer before cleanup (#15).
-
 # mdbr 0.3.1
-
-* Fixed compilation failure on macOS ARM64 (CRAN `r-release-macos-arm64` and
-  `r-oldrel-macos-arm64`). The vendored mdbtools source now correctly includes
-  `<xlocale.h>` on Apple platforms, where `locale_t` is not exposed through
-  `<locale.h>` alone under strict SDK settings (#14).
-
-* Fixed four C compiler warnings in vendored mdbtools source that caused CRAN
-  pre-test rejection (#12):
-  - `catalog.c`: expanded GCC-only `?:` to standard ternary
-  - `file.c`, `table.c`: cast `void*` to `char*` before pointer arithmetic
-  - `index.c`: declared `idx_to_text` as `unsigned char[]` to hold `0x81`
 
 # mdbr 0.3.0
 
