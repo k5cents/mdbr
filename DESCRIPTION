@@ -1,6 +1,6 @@
 Package: mdbr
 Title: Work with Microsoft Access Files
-Version: 0.3.3
+Version: 0.3.1
 Authors@R: c(
     person("Kiernan", "Nicholls", email = "k5cents@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-9229-7897")),
