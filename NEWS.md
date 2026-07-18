@@ -1,3 +1,7 @@
+# mdbr 0.3.2
+
+* Fix `const` qualifier warning in `fakeglib.c` flagged by GCC 16 on Fedora (#17).
+
 # mdbr 0.3.1
 
 # mdbr 0.3.0

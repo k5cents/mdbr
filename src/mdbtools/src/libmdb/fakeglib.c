@@ -50,7 +50,7 @@ int g_str_equal(const void *str1, const void *str2) {
 // max_tokens not yet implemented
 char **g_strsplit(const char *haystack, const char *needle, int max_tokens) {
     char **ret = NULL;
-    char *found = NULL;
+    const char *found = NULL;
     size_t components = 2; // last component + terminating NULL
     
     while ((found = strstr(haystack, needle))) {
