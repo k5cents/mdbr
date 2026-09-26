@@ -417,6 +417,7 @@ typedef struct {
 	int		col_num;	
 	int		cur_value_start;
 	int 		cur_value_len;
+	unsigned char cur_is_null;
 	/* MEMO/OLE readers */
 	guint32		cur_blob_pg_row;
 	int		chunk_size;

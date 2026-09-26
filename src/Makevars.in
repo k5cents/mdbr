@@ -5,4 +5,4 @@ MDBTOOLS_LIBMDB_OBJ := $(MDBTOOLS_LIBMDB_SRC:.c=.o)
 MDBTOOLS_SQL_SRC := $(wildcard mdbtools/src/sql/*.c)
 MDBTOOLS_SQL_OBJ := $(MDBTOOLS_SQL_SRC:.c=.o)
 
-OBJECTS = init.o mdb_native.o mdb_r_stdio.o $(MDBTOOLS_LIBMDB_OBJ) $(MDBTOOLS_SQL_OBJ)
+OBJECTS = init.o mdb_native.o mdb_cursor.o mdb_r_stdio.o $(MDBTOOLS_LIBMDB_OBJ) $(MDBTOOLS_SQL_OBJ)

@@ -45,79 +45,53 @@ remotes::install_github("k5cents/mdbr")
 library(mdbr)
 ```
 
-The package comes with a version of the
-[nycflights13](https://github.com/tidyverse/nycflights13) relational
-database found with `mdb_examples()`.
+The package bundles the [Northwind Access
+database](https://github.com/mdbtools/mdbtestdata), including related
+tables, foreign keys, and non-ASCII names. Find it with `mdb_example()`.
 
 The tables in a database can be listed with `mdb_tables()`.
 
 ``` r
 mdb_tables(ex <- mdb_example())
-#> [1] "Airlines" "Airports" "Flights"  "Planes"
+#> [1] "Order Details" "Orders"        "Products"      "Shippers"      "Categories"    "Customers"     "Employees"     "Suppliers"     "Umsätze"
 ```
 
 These tables can be exported as a delimited string or file.
 
 ``` r
-string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Shippers", output = TRUE, delim = "|", quote = "'")
 cat(string, sep = "\n")
-#> carrier|name
-#> '9E'|'Endeavor Air Inc.'
-#> 'AA'|'American Airlines Inc.'
-#> 'AS'|'Alaska Airlines Inc.'
-#> 'B6'|'JetBlue Airways'
-#> 'DL'|'Delta Air Lines Inc.'
-#> 'EV'|'ExpressJet Airlines Inc.'
-#> 'F9'|'Frontier Airlines Inc.'
-#> 'FL'|'AirTran Airways Corporation'
-#> 'HA'|'Hawaiian Airlines Inc.'
-#> 'MQ'|'Envoy Air'
-#> 'OO'|'SkyWest Airlines Inc.'
-#> 'UA'|'United Air Lines Inc.'
-#> 'US'|'US Airways Inc.'
-#> 'VX'|'Virgin America'
-#> 'WN'|'Southwest Airlines Co.'
-#> 'YV'|'Mesa Airlines Inc.'
+#> ShipperID|CompanyName|Phone
+#> '1'|'Speedy Express'|'(503) 555-9831'
+#> '2'|'United Package'|'(503) 555-3199'
+#> '3'|'Federal Shipping'|'(503) 555-9931'
 ```
 
 Tables are read directly into R as a tibble with automatic type
 coercion.
 
 ``` r
-read_mdb(ex, "Airports")
-#> # A tibble: 1,458 × 8
-#>    faa   name                             lat    lon   alt    tz dst   tzone              
-#>    <chr> <chr>                          <dbl>  <dbl> <int> <int> <chr> <chr>              
-#>  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   
-#>  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    
-#>  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    
-#>  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   
-#>  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   
-#>  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   
-#>  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   
-#>  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   
-#>  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   
-#> 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles
-#> # ℹ 1,448 more rows
+read_mdb(ex, "Shippers")
+#> # A tibble: 3 × 3
+#>   ShipperID CompanyName      Phone
+#>       <int> <chr>            <chr>
+#> 1         1 Speedy Express   (503) 555-9831
+#> 2         2 United Package   (503) 555-3199
+#> 3         3 Federal Shipping (503) 555-9931
 ```
 
 The DDL for a table can be retrieved with `mdb_schema(mode = "ddl")`.
 
 ``` r
-mdb_schema(ex, "Airports", mode = "ddl")
-#> [Airports]
+mdb_schema(ex, "Shippers", mode = "ddl")
+#> [Shippers]
 #> -- That file uses encoding UTF-8
 #> 
-#> CREATE TABLE [Airports]
+#> CREATE TABLE [Shippers]
 #>  (
-#>  [faa]           Text (255),
-#>  [name]          Text (255),
-#>  [lat]           Double,
-#>  [lon]           Double,
-#>  [alt]           Long Integer,
-#>  [tz]            Integer,
-#>  [dst]           Text (255),
-#>  [tzone]         Text (255)
+#>  [ShipperID]         Long Integer,
+#>  [CompanyName]           Text (40) NOT NULL,
+#>  [Phone]         Text (24)
 #> );
 ```
 
@@ -127,16 +101,11 @@ spec](https://readr.tidyverse.org/reference/cols.html) (requires the
 type.
 
 ``` r
-mdb_schema(ex, "Airports")
+mdb_schema(ex, "Shippers")
 #> cols(
-#>   faa = col_character(),
-#>   name = col_character(),
-#>   lat = col_double(),
-#>   lon = col_double(),
-#>   alt = col_integer(),
-#>   tz = col_integer(),
-#>   dst = col_character(),
-#>   tzone = col_character()
+#>   ShipperID = col_integer(),
+#>   CompanyName = col_character(),
+#>   Phone = col_character()
 #> )
 ```
 

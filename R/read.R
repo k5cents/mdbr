@@ -3,7 +3,9 @@
 #' Reads a table directly from a Microsoft Access database using the bundled
 #' mdbtools C library. Column types are inferred from the MDB schema:
 #' integer, double, logical, [POSIXct][base::DateTimeClasses] for DateTime
-#' columns, and character otherwise.
+#' columns, character text, and raw-vector list columns for binary and OLE
+#' fields. This eager convenience function reads the entire table into memory;
+#' use [mdb_stream_table()] for bounded batch reads.
 #'
 #' @param file Path to the Microsoft Access file.
 #' @param table Name of the table, list with [mdb_tables()].
@@ -17,7 +19,7 @@
 #' @importFrom tibble as_tibble
 #' @examples
 #' \dontrun{
-#' read_mdb(mdb_example(), "Airlines")
+#' read_mdb(mdb_example(), "Shippers")
 #' }
 #' @export
 read_mdb <- function(file, table, col_names = TRUE, col_types = NULL, ...) {
@@ -39,9 +41,9 @@ read_mdb <- function(file, table, col_names = TRUE, col_types = NULL, ...) {
     )
   }
   path <- .mdb_normalize_path(file)
-  raw <- .native_read_table(path, as.character(table))
-  df <- .as_data_frame(raw)
-  df <- .coerce_mdb_data_frame(df, raw)
+  con <- .mdb_connect(path)
+  on.exit(DBI::dbDisconnect(con), add = TRUE)
+  df <- DBI::dbReadTable(con, as.character(table))
   if (!isTRUE(col_names)) {
     names(df) <- paste0("V", seq_along(df))
   }

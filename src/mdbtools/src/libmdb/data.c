@@ -382,6 +382,7 @@ static int _mdb_attempt_bind(MdbHandle *mdb,
 	int offset, 
 	int len)
 {
+	col->cur_is_null = isnull;
 	if (col->col_type == MDB_BOOL) {
 		mdb_xfer_bound_bool(mdb, col, isnull);
 	} else if (isnull) {

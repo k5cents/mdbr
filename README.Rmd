@@ -54,8 +54,8 @@ remotes::install_github("k5cents/mdbr")
 library(mdbr)
 ```
 
-The package comes with a version of the [nycflights13][nycf] relational database
-found with `mdb_examples()`.
+The package bundles the [Northwind Access database][nwind], including related tables,
+foreign keys, and non-ASCII names. Find it with `mdb_example()`.
 
 The tables in a database can be listed with `mdb_tables()`.
 
@@ -66,20 +66,20 @@ mdb_tables(ex <- mdb_example())
 These tables can be exported as a delimited string or file.
 
 ```{r export}
-string <- export_mdb(ex, "Airlines", output = TRUE, delim = "|", quote = "'")
+string <- export_mdb(ex, "Shippers", output = TRUE, delim = "|", quote = "'")
 cat(string, sep = "\n")
 ```
 
 Tables are read directly into R as a tibble with automatic type coercion.
 
 ```{r read, message=FALSE}
-read_mdb(ex, "Airports")
+read_mdb(ex, "Shippers")
 ```
 
 The DDL for a table can be retrieved with `mdb_schema(mode = "ddl")`.
 
 ```{r ddl}
-mdb_schema(ex, "Airports", mode = "ddl")
+mdb_schema(ex, "Shippers", mode = "ddl")
 ```
 
 Column types are returned as a [readr col spec](https://readr.tidyverse.org/reference/cols.html)
@@ -87,7 +87,7 @@ Column types are returned as a [readr col spec](https://readr.tidyverse.org/refe
 sharing a type.
 
 ```{r schema}
-mdb_schema(ex, "Airports")
+mdb_schema(ex, "Shippers")
 ```
 
 
@@ -104,5 +104,5 @@ mdb_schema(ex, "Airports")
 [mdbt]: https://github.com/mdbtools/mdbtools
 [gh]:  https://github.com/k5cents/mdbr/
 [cran]:  https://cran.r-project.org/package=mdbr
-[nycf]: https://github.com/tidyverse/nycflights13
+[nwind]: https://github.com/mdbtools/mdbtestdata
 <!-- refs: end -->

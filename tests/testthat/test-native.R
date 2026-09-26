@@ -1,15 +1,14 @@
 library(testthat)
 library(mdbr)
 
-# Tests that verify the bundled mdbtools functionality using the nycflights13
-# example database shipped with the mdbr package.
+# Tests that verify the bundled mdbtools functionality using Northwind.
 
 test_that("mdb_tables returns tables using native backend", {
   skip_if_not(is.loaded("mdbr_version"))
   t <- mdb_tables(mdb_example())
   expect_type(t, "character")
   expect_gte(length(t), 1L)
-  expect_true("Airlines" %in% t)
+  expect_true("Shippers" %in% t)
 })
 
 test_that("mdb_tables type='query' returns character vector", {
@@ -40,17 +39,17 @@ test_that("mdb_ver with path returns file format", {
   expect_true(grepl("^(JET|ACE)", fmt))
 })
 
-test_that("mdb_sql queries nycflights13 example", {
+test_that("mdb_sql queries Northwind example", {
   skip_if_not(is.loaded("mdbr_version"))
-  df <- mdb_sql(mdb_example(), "SELECT * FROM [Airlines] LIMIT 3;")
+  df <- mdb_sql(mdb_example(), "SELECT * FROM [Shippers] LIMIT 3;")
   expect_s3_class(df, "data.frame")
   expect_lte(nrow(df), 3L)
-  expect_true("carrier" %in% names(df) || ncol(df) >= 1)
+  expect_identical("CompanyName" %in% names(df), TRUE)
 })
 
 test_that("mdb_count returns integer row count", {
   skip_if_not(is.loaded("mdbr_version"))
-  n <- mdb_count(mdb_example(), "Airlines")
+  n <- mdb_count(mdb_example(), "Shippers")
   expect_type(n, "integer")
   expect_gte(n, 1L)
 })
@@ -59,7 +58,7 @@ test_that("mdb_schema returns DDL text for a table", {
   skip_if_not(is.loaded("mdbr_version"))
   ddl <- mdb_schema(
     mdb_example(),
-    table = "Airlines",
+    table = "Shippers",
     mode = "ddl",
     as_list = FALSE
   )
@@ -69,36 +68,36 @@ test_that("mdb_schema returns DDL text for a table", {
 
 test_that("mdb_export returns CSV text", {
   skip_if_not(is.loaded("mdbr_version"))
-  csv <- mdb_export(mdb_example(), "Airlines", n = 2L)
+  csv <- mdb_export(mdb_example(), "Shippers", n = 2L)
   expect_type(csv, "character")
   expect_length(csv, 1L)
   expect_true(grepl(",", csv))
 })
 
-test_that("DBI connection to nycflights13 example works", {
+test_that("DBI connection to Northwind example works", {
   skip_if_not(is.loaded("mdbr_version"))
   conn <- DBI::dbConnect(mdb(), dbname = mdb_example())
   on.exit(DBI::dbDisconnect(conn), add = TRUE)
 
   expect_true(DBI::dbIsValid(conn))
   tables <- DBI::dbListTables(conn)
-  expect_true("Airlines" %in% tables)
+  expect_true("Shippers" %in% tables)
 
-  df <- DBI::dbReadTable(conn, "Airlines")
+  df <- DBI::dbReadTable(conn, "Shippers")
   expect_s3_class(df, "data.frame")
   expect_gte(nrow(df), 1L)
 })
 
 test_that("export_mdb backward-compat: returns CSV text via native", {
   skip_if_not(is.loaded("mdbr_version"))
-  dat <- export_mdb(mdb_example(), "Airlines", output = TRUE)
+  dat <- export_mdb(mdb_example(), "Shippers", output = TRUE)
   expect_type(dat, "character")
   expect_length(dat, 1L)
 })
 
 test_that("read_mdb backward-compat: reads table as tibble", {
   skip_if_not(is.loaded("mdbr_version"))
-  dat <- read_mdb(mdb_example(), "Airlines")
+  dat <- read_mdb(mdb_example(), "Shippers")
   expect_s3_class(dat, "data.frame")
   expect_gte(nrow(dat), 1L)
 })

@@ -312,5 +312,7 @@ rm -rf "$TESTDATA_DIR"
 mkdir -p "$TESTDATA_DIR"
 cp -R "$testdata_unpacked/data" "$TESTDATA_DIR"/
 cp -R "$testdata_unpacked/sql" "$TESTDATA_DIR"/
+# The Northwind fixture is installed as the package example, not duplicated in tests.
+rm -f "$TESTDATA_DIR/data/nwind.mdb"
 
 echo "[mdbr] Test fixtures refreshed in $TESTDATA_DIR"

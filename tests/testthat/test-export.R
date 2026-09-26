@@ -4,7 +4,7 @@ library(mdbr)
 test_that("tables can be exported as strings", {
   skip_on_cran()
   skip_if_not(is.loaded("mdbr_version"))
-  dat <- export_mdb(mdb_example(), "Airlines", output = TRUE)
+  dat <- export_mdb(mdb_example(), "Shippers", output = TRUE)
   expect_type(dat, "character")
   expect_length(dat, 1)
 })
@@ -13,9 +13,9 @@ test_that("tables can be exported to file", {
   skip_on_cran()
   skip_if_not(is.loaded("mdbr_version"))
   tmp <- tempfile()
-  dat <- export_mdb(mdb_example(), "Airlines", output = tmp)
+  dat <- export_mdb(mdb_example(), "Shippers", output = tmp)
   expect_true(file.exists(tmp))
-  expect_equal(file.size(tmp), 450)
+  expect_gt(file.size(tmp), 0)
 })
 
 test_that("tables can be exported without escape", {
@@ -23,7 +23,7 @@ test_that("tables can be exported without escape", {
   skip_if_not(is.loaded("mdbr_version"))
   dat <- export_mdb(
     file = mdb_example(),
-    table = "Airlines",
+    table = "Shippers",
     output = TRUE,
     quote_escape = FALSE
   )

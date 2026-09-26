@@ -26,10 +26,12 @@ A \link[tibble:tibble]{tibble}.
 Reads a table directly from a Microsoft Access database using the bundled
 mdbtools C library. Column types are inferred from the MDB schema:
 integer, double, logical, \link[base:DateTimeClasses]{POSIXct} for DateTime
-columns, and character otherwise.
+columns, character text, and raw-vector list columns for binary and OLE
+fields. This eager convenience function reads the entire table into memory;
+use \code{\link[=mdb_stream_table]{mdb_stream_table()}} for bounded batch reads.
 }
 \examples{
 \dontrun{
-read_mdb(mdb_example(), "Airlines")
+read_mdb(mdb_example(), "Shippers")
 }
 }

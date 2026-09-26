@@ -1,5 +1,11 @@
 # mdbr 0.3.2.9000
 
+* `dbFetch()` now advances eager SQL results correctly across successive calls. (#18)
+* `mdb_stream_table()` preserves Decimal values in MDB/ACCDB files and allocates finite fetch buffers according to rows returned rather than the requested maximum. (#18)
+* `mdb_example()` now returns the bundled Northwind database instead of nycflights13; tests also cover related tables and ACCDB format without duplicating Northwind. (#18)
+* `mdb_stream_table()` provides a native batch cursor for MDB/ACCDB tables; `dbReadTable()` and `read_mdb()` remain eager, while SQL `dbSendQuery()` remains eager. Binary/OLE table fields now return raw list columns, and empty text is distinct from NULL. (#streaming)
+* `dbFetch()` on streaming results supports typed empty batches and `n = 0`; `dbIsValid()` now becomes false after `dbClearResult()` and stays true after exhaustion. (#streaming)
+
 # mdbr 0.3.2
 
 * Fix `const` qualifier warning in `fakeglib.c` flagged by GCC 16 on Fedora (#17).

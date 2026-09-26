@@ -4,18 +4,18 @@
 \alias{mdb_example}
 \title{Get path to mdbr example}
 \usage{
-mdb_example(path = "nycflights13.mdb")
+mdb_example(path = "nwind.mdb")
 }
 \arguments{
-\item{path}{path to the Microsoft Access file.}
+\item{path}{Name of the bundled Microsoft Access file, or \code{NULL} to list
+available examples.}
 }
 \value{
 A character string with the full path to the bundled example file.
 }
 \description{
-mdbr comes bundled with a sample file from the
-\href{https://github.com/tidyverse/nycflights13}{nycflights13} package in its
-inst/extdata directory. This function make it easy to access.
+mdbr bundles the Northwind Access database in \code{inst/extdata}. This helper
+returns its path, or lists bundled examples when \code{path = NULL}.
 }
 \examples{
 mdb_example()

@@ -55,6 +55,6 @@ it easy to read tables into R or a spreadsheet.
 }
 \examples{
 \dontrun{
-export_mdb(mdb_example(), "Airlines", output = TRUE)
+export_mdb(mdb_example(), "Shippers", output = TRUE)
 }
 }

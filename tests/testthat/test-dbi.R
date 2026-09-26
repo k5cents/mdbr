@@ -5,7 +5,7 @@ sample_accdb <- testthat::test_path(
   "data",
   "ASampleDatabase.accdb"
 )
-sample_mdb <- testthat::test_path("mdbtestdata", "data", "nwind.mdb")
+sample_mdb <- mdb_example()
 sample_sql <- testthat::test_path("mdbtestdata", "sql", "nwind.sql")
 
 read_sql_statements <- function(path) {
@@ -81,6 +81,26 @@ test_that("dbReadTable applies type coercion from MDB metadata", {
         formatted
       )
   ))
+})
+
+test_that("eager query results advance across fetches", {
+  skip_if_not(file.exists(sample_mdb))
+  conn <- DBI::dbConnect(sample_mdb)
+  on.exit(DBI::dbDisconnect(conn))
+  res <- DBI::dbSendQuery(conn, "SELECT * FROM [Shippers];")
+  on.exit(DBI::dbClearResult(res), add = TRUE)
+  first <- DBI::dbFetch(res, n = 1L)
+  second <- DBI::dbFetch(res, n = 1L)
+  expect_identical(nrow(first), 1L)
+  expect_identical(nrow(second), 1L)
+  expect_identical(DBI::dbHasCompleted(res), FALSE)
+  remaining <- DBI::dbFetch(res, n = -1L)
+  expect_identical(DBI::dbHasCompleted(res), TRUE)
+  expect_identical(
+    nrow(first) + nrow(second) + nrow(remaining),
+    nrow(DBI::dbGetQuery(conn, "SELECT * FROM [Shippers];"))
+  )
+  expect_identical(nrow(DBI::dbFetch(res, n = 1L)), 0L)
 })
 
 test_that("query roundtrip works", {
@@ -282,7 +302,12 @@ test_that("mdb_schema selected table output is mdblist by default", {
 test_that("mdb_schema can return named mdblist for selected tables", {
   skip_if_not(file.exists(sample_mdb))
 
-  ddl <- mdb_schema(sample_mdb, table = c("Products", "Orders"), mode = "ddl", as_list = TRUE)
+  ddl <- mdb_schema(
+    sample_mdb,
+    table = c("Products", "Orders"),
+    mode = "ddl",
+    as_list = TRUE
+  )
   expect_s3_class(ddl, "mdblist")
   expect_true(all(c("Products", "Orders") %in% names(ddl)))
   expect_true(all(vapply(
@@ -305,7 +330,12 @@ test_that("mdb_schema with no table returns mdblist by default", {
 test_that("mdb_schema output does not include legacy banner", {
   skip_if_not(file.exists(sample_mdb))
 
-  ddl <- mdb_schema(sample_mdb, table = "Products", mode = "ddl", as_list = FALSE)
+  ddl <- mdb_schema(
+    sample_mdb,
+    table = "Products",
+    mode = "ddl",
+    as_list = FALSE
+  )
   expect_false(grepl(
     "MDB Tools - A library for reading MS Access database files",
     ddl,

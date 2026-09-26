@@ -11,7 +11,10 @@ A DBI driver for '.mdb' and '.accdb' files.
 }
 \description{
 \code{mdb()} is the canonical DBI-style constructor for connecting to Microsoft
-Access '.mdb' and '.accdb' files.
+Access '.mdb' and '.accdb' files. \code{dbSendQuery()} currently materializes SQL
+results eagerly; for a streaming named table use \code{\link[=mdb_stream_table]{mdb_stream_table()}}.
+Existing export helpers remain eager and should not be used for bounded-
+memory conversion.
 }
 \examples{
 db <- mdb_example()

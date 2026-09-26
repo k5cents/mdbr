@@ -5,16 +5,16 @@ test_that("schema returns a col_spec with expected columns", {
   skip_on_cran()
   skip_if_not(is.loaded("mdbr_version"))
   skip_if_not_installed("readr")
-  dat <- mdb_schema(mdb_example(), "Flights")
+  dat <- mdb_schema(mdb_example(), "Products")
   expect_s3_class(dat, "col_spec")
-  expect_length(dat$cols, 19L)
+  expect_length(dat$cols, 10L)
 })
 
 test_that("schema condense returns condensed col_spec", {
   skip_on_cran()
   skip_if_not(is.loaded("mdbr_version"))
   skip_if_not_installed("readr")
-  dat <- mdb_schema(mdb_example(), "Flights", condense = TRUE)
+  dat <- mdb_schema(mdb_example(), "Products", condense = TRUE)
   expect_s3_class(dat, "col_spec")
 })
 

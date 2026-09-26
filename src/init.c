@@ -8,6 +8,10 @@ SEXP mdbr_list_objects(SEXP path_sexp, SEXP type_sexp);
 SEXP mdbr_list_fields(SEXP path_sexp, SEXP table_sexp);
 SEXP mdbr_table_num_rows(SEXP path_sexp, SEXP table_sexp);
 SEXP mdbr_read_table(SEXP path_sexp, SEXP table_sexp);
+SEXP mdbr_cursor_open(SEXP path_sexp, SEXP table_sexp);
+SEXP mdbr_cursor_fetch(SEXP ptr, SEXP n);
+SEXP mdbr_cursor_close(SEXP ptr);
+SEXP mdbr_cursor_valid(SEXP ptr);
 SEXP mdbr_run_query(SEXP path_sexp, SEXP statement_sexp);
 SEXP mdbr_get_query_sql(SEXP path_sexp, SEXP query_name_sexp);
 SEXP mdbr_print_schema(SEXP path_sexp, SEXP table_sexp, SEXP backend_sexp, SEXP namespace_sexp, SEXP options_sexp);
@@ -22,6 +26,10 @@ static const R_CallMethodDef call_methods[] = {
   {"mdbr_list_fields", (DL_FUNC) &mdbr_list_fields, 2},
   {"mdbr_table_num_rows", (DL_FUNC) &mdbr_table_num_rows, 2},
   {"mdbr_read_table", (DL_FUNC) &mdbr_read_table, 2},
+  {"mdbr_cursor_open", (DL_FUNC) &mdbr_cursor_open, 2},
+  {"mdbr_cursor_fetch", (DL_FUNC) &mdbr_cursor_fetch, 2},
+  {"mdbr_cursor_close", (DL_FUNC) &mdbr_cursor_close, 1},
+  {"mdbr_cursor_valid", (DL_FUNC) &mdbr_cursor_valid, 1},
   {"mdbr_run_query", (DL_FUNC) &mdbr_run_query, 2},
   {"mdbr_get_query_sql", (DL_FUNC) &mdbr_get_query_sql, 2},
   {"mdbr_print_schema", (DL_FUNC) &mdbr_print_schema, 5},

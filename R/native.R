@@ -41,6 +41,22 @@
   .Call("mdbr_table_num_rows", PACKAGE = "mdbr", path, table)
 }
 
+.native_cursor_open <- function(path, table) {
+  .Call("mdbr_cursor_open", PACKAGE = "mdbr", path, table)
+}
+
+.native_cursor_fetch <- function(cursor, n) {
+  .Call("mdbr_cursor_fetch", PACKAGE = "mdbr", cursor, as.integer(n))
+}
+
+.native_cursor_close <- function(cursor) {
+  .Call("mdbr_cursor_close", PACKAGE = "mdbr", cursor)
+}
+
+.native_cursor_valid <- function(cursor) {
+  .Call("mdbr_cursor_valid", PACKAGE = "mdbr", cursor)
+}
+
 .native_read_table <- function(path, table) {
   .Call("mdbr_read_table", PACKAGE = "mdbr", path, table)
 }
@@ -196,7 +212,7 @@
 
 .coerce_column_by_type <- function(x, type_code) {
   type_code <- as.integer(type_code[[1]])
-  if (is.na(type_code) || !length(x)) {
+  if (is.na(type_code)) {
     return(x)
   }
   if (type_code == .MDB_TYPE$BOOL) {
@@ -451,21 +467,7 @@
 .mdb_example_nwind_path <- function() {
   candidates <- c(
     Sys.getenv("MDBR_EXAMPLE_DB", unset = ""),
-    system.file(
-      "testthat",
-      "mdbtestdata",
-      "data",
-      "nwind.mdb",
-      package = "mdbr"
-    ),
-    system.file(
-      "tests",
-      "testthat",
-      "mdbtestdata",
-      "data",
-      "nwind.mdb",
-      package = "mdbr"
-    )
+    system.file("extdata", "nwind.mdb", package = "mdbr")
   )
   candidates <- unique(candidates[nzchar(candidates)])
   hits <- candidates[file.exists(candidates)]

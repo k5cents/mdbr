@@ -26,7 +26,7 @@
 #' @return Character string, invisible if path to file.
 #' @examples
 #' \dontrun{
-#' export_mdb(mdb_example(), "Airlines", output = TRUE)
+#' export_mdb(mdb_example(), "Shippers", output = TRUE)
 #' }
 #' @export
 export_mdb <- function(
