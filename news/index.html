@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -48,27 +48,25 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.3" id="mdbr-033">mdbr 0.3.3<a class="anchor" aria-label="anchor" href="#mdbr-033"></a></h2>
-<ul><li>Fixed compilation failure on Linux with clang-22 / clang-ASAN (CRAN’s <code>clang-ASAN</code> check platform). <code>vasprintf()</code> requires <code>_GNU_SOURCE</code> to be visible from glibc’s <code>&lt;stdio.h&gt;</code>; added <code>#define _GNU_SOURCE</code> guard at the top of <code>src/mdbtools/src/libmdb/fakeglib.c</code> before system headers are included. Not needed on macOS where <code>vasprintf()</code> is always available.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.2" id="mdbr-032">mdbr 0.3.2<a class="anchor" aria-label="anchor" href="#mdbr-032"></a></h2>
-<ul><li>Fixed heap-use-after-free in <code>mdbr_run_query</code> (detected by AddressSanitizer on CRAN’s M1-SAN and Linux sanitizer checks). When a SQL query failed, the error message was read from a pointer into the <code>MdbSQL</code> struct after the struct had been freed via <code>mdb_sql_exit()</code>. The error string is now copied into a local buffer before cleanup (<a href="https://github.com/k5cents/mdbr/issues/15" class="external-link">#15</a>).</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.1" id="mdbr-031">mdbr 0.3.1<a class="anchor" aria-label="anchor" href="#mdbr-031"></a></h2>
-<ul><li><p>Fixed compilation failure on macOS ARM64 (CRAN <code>r-release-macos-arm64</code> and <code>r-oldrel-macos-arm64</code>). The vendored mdbtools source now correctly includes <code>&lt;xlocale.h&gt;</code> on Apple platforms, where <code>locale_t</code> is not exposed through <code>&lt;locale.h&gt;</code> alone under strict SDK settings (<a href="https://github.com/k5cents/mdbr/issues/14" class="external-link">#14</a>).</p></li>
-<li>
-<p>Fixed four C compiler warnings in vendored mdbtools source that caused CRAN pre-test rejection (<a href="https://github.com/k5cents/mdbr/issues/12" class="external-link">#12</a>):</p>
+<h2 class="page-header" data-toc-text="0.3.2.9000" id="mdbr-0329000">mdbr 0.3.2.9000<a class="anchor" aria-label="anchor" href="#mdbr-0329000"></a></h2>
 <ul><li>
-<code>catalog.c</code>: expanded GCC-only <code>?:</code> to standard ternary</li>
+<code>dbFetch()</code> now advances eager SQL results correctly across successive calls. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
 <li>
-<code>file.c</code>, <code>table.c</code>: cast <code>void*</code> to <code>char*</code> before pointer arithmetic</li>
+<code><a href="../reference/mdb_stream_table.html">mdb_stream_table()</a></code> preserves Decimal values in MDB/ACCDB files and allocates finite fetch buffers according to rows returned rather than the requested maximum. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
 <li>
-<code>index.c</code>: declared <code>idx_to_text</code> as <code>unsigned char[]</code> to hold <code>0x81</code>
-</li>
-</ul></li>
+<code><a href="../reference/mdb_example.html">mdb_example()</a></code> now returns the bundled Northwind database instead of nycflights13; tests also cover related tables and ACCDB format without duplicating Northwind. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
+<li>
+<code><a href="../reference/mdb_stream_table.html">mdb_stream_table()</a></code> provides a native batch cursor for MDB/ACCDB tables; <code>dbReadTable()</code> and <code><a href="../reference/read_mdb.html">read_mdb()</a></code> remain eager, while SQL <code>dbSendQuery()</code> remains eager. Binary/OLE table fields now return raw list columns, and empty text is distinct from NULL. (#streaming)</li>
+<li>
+<code>dbFetch()</code> on streaming results supports typed empty batches and <code>n = 0</code>; <code>dbIsValid()</code> now becomes false after <code>dbClearResult()</code> and stays true after exhaustion. (#streaming)</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.2" id="mdbr-032">mdbr 0.3.2<small>2026-07-18</small><a class="anchor" aria-label="anchor" href="#mdbr-032"></a></h2>
+<ul><li>Fix <code>const</code> qualifier warning in <code>fakeglib.c</code> flagged by GCC 16 on Fedora (<a href="https://github.com/k5cents/mdbr/issues/17" class="external-link">#17</a>).</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.1" id="mdbr-031">mdbr 0.3.1<small>2026-05-28</small><a class="anchor" aria-label="anchor" href="#mdbr-031"></a></h2>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="mdbr-030">mdbr 0.3.0<small>2026-05-23</small><a class="anchor" aria-label="anchor" href="#mdbr-030"></a></h2>
 <ul><li><p>The <code>mdbtools</code> C library is now compiled and bundled with the package. No external <code>mdbtools</code> installation is required on any platform (<a href="https://github.com/k5cents/mdbr/issues/3" class="external-link">#3</a>).</p></li>
@@ -131,7 +129,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

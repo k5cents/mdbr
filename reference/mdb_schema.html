@@ -21,7 +21,7 @@ readr col spec for the table instead.'><meta property="og:image" content="/logo.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -164,6 +164,24 @@ DDL text.</p>
 <span class="r-in"><span>  <span class="fu">mdb_schema</span><span class="op">(</span><span class="va">db</span>, table <span class="op">=</span> <span class="st">"Products"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">mdb_schema</span><span class="op">(</span><span class="va">db</span>, table <span class="op">=</span> <span class="st">"Products"</span>, mode <span class="op">=</span> <span class="st">"ddl"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [Products]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -- That file uses encoding UTF-8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CREATE TABLE [Products]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  (</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[ProductID]			Long Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[ProductName]			Text (40) NOT NULL,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[SupplierID]			Long Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[CategoryID]			Long Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[QuantityPerUnit]			Text (20),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[UnitPrice]			Currency,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[UnitsInStock]			Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[UnitsOnOrder]			Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[ReorderLevel]			Integer,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	[Discontinued]			Boolean NOT NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> );</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </div>
@@ -178,7 +196,7 @@ DDL text.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

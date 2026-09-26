@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
       </span>
     </div>
 
@@ -88,78 +88,47 @@
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://k5cents.github.io/mdbr/" class="external-link">mdbr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The package comes with a version of the <a href="https://github.com/tidyverse/nycflights13" class="external-link">nycflights13</a> relational database found with <code>mdb_examples()</code>.</p>
+<p>The package bundles the <a href="https://github.com/mdbtools/mdbtestdata" class="external-link">Northwind Access database</a>, including related tables, foreign keys, and non-ASCII names. Find it with <code><a href="reference/mdb_example.html">mdb_example()</a></code>.</p>
 <p>The tables in a database can be listed with <code><a href="reference/mdb_tables.html">mdb_tables()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_tables.html">mdb_tables</a></span><span class="op">(</span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mdb_example.html">mdb_example</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Airlines" "Airports" "Flights"  "Planes"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "Order Details" "Orders"        "Products"      "Shippers"      "Categories"    "Customers"     "Employees"     "Suppliers"     "Umsätze"</span></span></code></pre></div>
 <p>These tables can be exported as a delimited string or file.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airlines"</span>, output <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/export_mdb.html">export_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Shippers"</span>, output <span class="op">=</span> <span class="cn">TRUE</span>, delim <span class="op">=</span> <span class="st">"|"</span>, quote <span class="op">=</span> <span class="st">"'"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">string</span>, sep <span class="op">=</span> <span class="st">"\n"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; carrier|name</span></span>
-<span><span class="co">#&gt; '9E'|'Endeavor Air Inc.'</span></span>
-<span><span class="co">#&gt; 'AA'|'American Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'AS'|'Alaska Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'B6'|'JetBlue Airways'</span></span>
-<span><span class="co">#&gt; 'DL'|'Delta Air Lines Inc.'</span></span>
-<span><span class="co">#&gt; 'EV'|'ExpressJet Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'F9'|'Frontier Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'FL'|'AirTran Airways Corporation'</span></span>
-<span><span class="co">#&gt; 'HA'|'Hawaiian Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'MQ'|'Envoy Air'</span></span>
-<span><span class="co">#&gt; 'OO'|'SkyWest Airlines Inc.'</span></span>
-<span><span class="co">#&gt; 'UA'|'United Air Lines Inc.'</span></span>
-<span><span class="co">#&gt; 'US'|'US Airways Inc.'</span></span>
-<span><span class="co">#&gt; 'VX'|'Virgin America'</span></span>
-<span><span class="co">#&gt; 'WN'|'Southwest Airlines Co.'</span></span>
-<span><span class="co">#&gt; 'YV'|'Mesa Airlines Inc.'</span></span></code></pre></div>
+<span><span class="co">#&gt; ShipperID|CompanyName|Phone</span></span>
+<span><span class="co">#&gt; '1'|'Speedy Express'|'(503) 555-9831'</span></span>
+<span><span class="co">#&gt; '2'|'United Package'|'(503) 555-3199'</span></span>
+<span><span class="co">#&gt; '3'|'Federal Shipping'|'(503) 555-9931'</span></span></code></pre></div>
 <p>Tables are read directly into R as a tibble with automatic type coercion.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/read_mdb.html">read_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 1,458 × 8</span></span>
-<span><span class="co">#&gt;    faa   name                             lat    lon   alt    tz dst   tzone              </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;                          &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;              </span></span>
-<span><span class="co">#&gt;  1 04G   Lansdowne Airport               41.1  -80.6  1044    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  2 06A   Moton Field Municipal Airport   32.5  -85.7   264    -6 A     America/Chicago    </span></span>
-<span><span class="co">#&gt;  3 06C   Schaumburg Regional             42.0  -88.1   801    -6 A     America/Chicago    </span></span>
-<span><span class="co">#&gt;  4 06N   Randall Airport                 41.4  -74.4   523    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  5 09J   Jekyll Island Airport           31.1  -81.4    11    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  6 0A9   Elizabethton Municipal Airport  36.4  -82.2  1593    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  7 0G6   Williams County Airport         41.5  -84.5   730    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  8 0G7   Finger Lakes Regional Airport   42.9  -76.8   492    -5 A     America/New_York   </span></span>
-<span><span class="co">#&gt;  9 0P2   Shoestring Aviation Airfield    39.8  -76.6  1000    -5 U     America/New_York   </span></span>
-<span><span class="co">#&gt; 10 0S9   Jefferson County Intl           48.1 -123.    108    -8 A     America/Los_Angeles</span></span>
-<span><span class="co">#&gt; # ℹ 1,448 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/read_mdb.html">read_mdb</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Shippers"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt;   ShipperID CompanyName      Phone</span></span>
+<span><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1         1 Speedy Express   (503) 555-9831</span></span>
+<span><span class="co">#&gt; 2         2 United Package   (503) 555-3199</span></span>
+<span><span class="co">#&gt; 3         3 Federal Shipping (503) 555-9931</span></span></code></pre></div>
 <p>The DDL for a table can be retrieved with <code>mdb_schema(mode = "ddl")</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span>, mode <span class="op">=</span> <span class="st">"ddl"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [Airports]</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Shippers"</span>, mode <span class="op">=</span> <span class="st">"ddl"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [Shippers]</span></span>
 <span><span class="co">#&gt; -- That file uses encoding UTF-8</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; CREATE TABLE [Airports]</span></span>
+<span><span class="co">#&gt; CREATE TABLE [Shippers]</span></span>
 <span><span class="co">#&gt;  (</span></span>
-<span><span class="co">#&gt;  [faa]           Text (255),</span></span>
-<span><span class="co">#&gt;  [name]          Text (255),</span></span>
-<span><span class="co">#&gt;  [lat]           Double,</span></span>
-<span><span class="co">#&gt;  [lon]           Double,</span></span>
-<span><span class="co">#&gt;  [alt]           Long Integer,</span></span>
-<span><span class="co">#&gt;  [tz]            Integer,</span></span>
-<span><span class="co">#&gt;  [dst]           Text (255),</span></span>
-<span><span class="co">#&gt;  [tzone]         Text (255)</span></span>
+<span><span class="co">#&gt;  [ShipperID]         Long Integer,</span></span>
+<span><span class="co">#&gt;  [CompanyName]           Text (40) NOT NULL,</span></span>
+<span><span class="co">#&gt;  [Phone]         Text (24)</span></span>
 <span><span class="co">#&gt; );</span></span></code></pre></div>
 <p>Column types are returned as a <a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">readr col spec</a> (requires the <strong>readr</strong> package). Use <code>condense = TRUE</code> to collapse columns sharing a type.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Airports"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/mdb_schema.html">mdb_schema</a></span><span class="op">(</span><span class="va">ex</span>, <span class="st">"Shippers"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cols(</span></span>
-<span><span class="co">#&gt;   faa = col_character(),</span></span>
-<span><span class="co">#&gt;   name = col_character(),</span></span>
-<span><span class="co">#&gt;   lat = col_double(),</span></span>
-<span><span class="co">#&gt;   lon = col_double(),</span></span>
-<span><span class="co">#&gt;   alt = col_integer(),</span></span>
-<span><span class="co">#&gt;   tz = col_integer(),</span></span>
-<span><span class="co">#&gt;   dst = col_character(),</span></span>
-<span><span class="co">#&gt;   tzone = col_character()</span></span>
+<span><span class="co">#&gt;   ShipperID = col_integer(),</span></span>
+<span><span class="co">#&gt;   CompanyName = col_character(),</span></span>
+<span><span class="co">#&gt;   Phone = col_character()</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre></div>
 <!-- refs: start -->
 <!-- refs: end -->
@@ -230,7 +199,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>
