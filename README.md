@@ -53,7 +53,8 @@ The tables in a database can be listed with `mdb_tables()`.
 
 ``` r
 mdb_tables(ex <- mdb_example())
-#> [1] "Order Details" "Orders"        "Products"      "Shippers"      "Categories"    "Customers"     "Employees"     "Suppliers"     "Umsätze"
+#> [1] "Order Details" "Orders"        "Products"      "Shippers"      "Categories"    "Customers"    
+#> [7] "Employees"     "Suppliers"     "Umsätze"
 ```
 
 These tables can be exported as a delimited string or file.
@@ -73,8 +74,8 @@ coercion.
 ``` r
 read_mdb(ex, "Shippers")
 #> # A tibble: 3 × 3
-#>   ShipperID CompanyName      Phone
-#>       <int> <chr>            <chr>
+#>   ShipperID CompanyName      Phone         
+#>       <int> <chr>            <chr>         
 #> 1         1 Speedy Express   (503) 555-9831
 #> 2         2 United Package   (503) 555-3199
 #> 3         3 Federal Shipping (503) 555-9931

@@ -1,10 +1,31 @@
 # mdbr 0.3.2.9000
 
-* `dbFetch()` now advances eager SQL results correctly across successive calls. (#18)
-* `mdb_stream_table()` preserves Decimal values in MDB/ACCDB files and allocates finite fetch buffers according to rows returned rather than the requested maximum. (#18)
-* `mdb_example()` now returns the bundled Northwind database instead of nycflights13; tests also cover related tables and ACCDB format without duplicating Northwind. (#18)
-* `mdb_stream_table()` provides a native batch cursor for MDB/ACCDB tables; `dbReadTable()` and `read_mdb()` remain eager, while SQL `dbSendQuery()` remains eager. Binary/OLE table fields now return raw list columns, and empty text is distinct from NULL. (#streaming)
-* `dbFetch()` on streaming results supports typed empty batches and `n = 0`; `dbIsValid()` now becomes false after `dbClearResult()` and stays true after exhaustion. (#streaming)
+## Breaking changes
+
+* Binary and OLE fields are now returned as list columns of raw vectors
+  instead of character strings (#18).
+
+* Empty text values are now returned as `""` instead of `NA`. Only NULL values
+  become `NA` (#18).
+
+* `mdb_example()` now returns the bundled Northwind database (`nwind.mdb`).
+  The nycflights13 example file has been removed (#18).
+
+## New features
+
+* New `mdb_stream_table()` opens a table as a DBI result that can be read in
+  batches with `DBI::dbFetch()`, keeping memory use bounded for large tables.
+  `dbReadTable()` and `read_mdb()` now read through the same cursor. SQL
+  queries sent with `dbSendQuery()` are still read in full (#18, @meztez).
+
+## Bug fixes
+
+* `dbFetch()` now advances through `dbSendQuery()` results across successive
+  calls, and `dbHasCompleted()` reports completion correctly (#18).
+
+* `dbFetch()` accepts `n = 0` and returns a zero-row data frame with the
+  correct column types. `dbIsValid()` is now `FALSE` after `dbClearResult()`
+  (#18).
 
 # mdbr 0.3.2
 
