@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mdbr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.0</span>
       </span>
     </div>
 
@@ -48,18 +48,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.2.9000" id="mdbr-0329000">mdbr 0.3.2.9000<a class="anchor" aria-label="anchor" href="#mdbr-0329000"></a></h2>
-<ul><li>
-<code>dbFetch()</code> now advances eager SQL results correctly across successive calls. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
-<li>
-<code><a href="../reference/mdb_stream_table.html">mdb_stream_table()</a></code> preserves Decimal values in MDB/ACCDB files and allocates finite fetch buffers according to rows returned rather than the requested maximum. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
-<li>
-<code><a href="../reference/mdb_example.html">mdb_example()</a></code> now returns the bundled Northwind database instead of nycflights13; tests also cover related tables and ACCDB format without duplicating Northwind. (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>)</li>
-<li>
-<code><a href="../reference/mdb_stream_table.html">mdb_stream_table()</a></code> provides a native batch cursor for MDB/ACCDB tables; <code>dbReadTable()</code> and <code><a href="../reference/read_mdb.html">read_mdb()</a></code> remain eager, while SQL <code>dbSendQuery()</code> remains eager. Binary/OLE table fields now return raw list columns, and empty text is distinct from NULL. (#streaming)</li>
-<li>
-<code>dbFetch()</code> on streaming results supports typed empty batches and <code>n = 0</code>; <code>dbIsValid()</code> now becomes false after <code>dbClearResult()</code> and stays true after exhaustion. (#streaming)</li>
+<h2 class="page-header" data-toc-text="0.4.0" id="mdbr-040">mdbr 0.4.0<a class="anchor" aria-label="anchor" href="#mdbr-040"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-0-4-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-4-0"></a></h3>
+<ul><li><p>Binary and OLE fields are now returned as list columns of raw vectors instead of character strings (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>).</p></li>
+<li><p>Empty text values are now returned as <code>""</code> instead of <code>NA</code>. Only NULL values become <code>NA</code> (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>).</p></li>
+<li><p><code><a href="../reference/mdb_example.html">mdb_example()</a></code> now returns the bundled Northwind database (<code>nwind.mdb</code>). The nycflights13 example file has been removed (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>).</p></li>
 </ul></div>
+<div class="section level3">
+<h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
+<ul><li>New <code><a href="../reference/mdb_stream_table.html">mdb_stream_table()</a></code> opens a table as a DBI result that can be read in batches with <code><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">DBI::dbFetch()</a></code>, keeping memory use bounded for large tables. <code>dbReadTable()</code> and <code><a href="../reference/read_mdb.html">read_mdb()</a></code> now read through the same cursor. SQL queries sent with <code>dbSendQuery()</code> are still read in full (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>, <a href="https://github.com/meztez" class="external-link">@meztez</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-4-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0"></a></h3>
+<ul><li><p><code>dbFetch()</code> now advances through <code>dbSendQuery()</code> results across successive calls, and <code>dbHasCompleted()</code> reports completion correctly (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>).</p></li>
+<li><p><code>dbFetch()</code> accepts <code>n = 0</code> and returns a zero-row data frame with the correct column types. <code>dbIsValid()</code> is now <code>FALSE</code> after <code>dbClearResult()</code> (<a href="https://github.com/k5cents/mdbr/issues/18" class="external-link">#18</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.2" id="mdbr-032">mdbr 0.3.2<small>2026-07-18</small><a class="anchor" aria-label="anchor" href="#mdbr-032"></a></h2>
 <ul><li>Fix <code>const</code> qualifier warning in <code>fakeglib.c</code> flagged by GCC 16 on Fedora (<a href="https://github.com/k5cents/mdbr/issues/17" class="external-link">#17</a>).</li>
