@@ -19,8 +19,8 @@
 #' \dontrun{
 #' con <- DBI::dbConnect(mdb(), dbname = mdb_example())
 #' res <- mdb_stream_table(con, "Shippers")
-#' on.exit(DBI::dbClearResult(res))
 #' DBI::dbFetch(res, n = 100L)
+#' DBI::dbClearResult(res)
 #' DBI::dbDisconnect(con)
 #' }
 #' @export
